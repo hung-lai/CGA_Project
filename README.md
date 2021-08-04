@@ -10,9 +10,9 @@ Fügen Sie ihren Projektnamen hinzu
 
 # Teammitglieder
 Listen Sie hier noch einmal alle Teammitglieder auf.
-- Armin Anfang
-- Berta Beliebig
-- Carola Coautor
+- Alan Umarow
+- Jonathan Paul
+- Hung Lai Dang
 
 # Featureliste
 Listen Sie hier alle relevanten Features als Liste mit sinnvoller Reihenfolge auf mit Angabe wer das Feature implementiert hat.
