@@ -29,6 +29,8 @@ public class Scene(private val window: GameWindow) {
     private var meshBoden : Mesh
     //private var meshKugel : Mesh
     private var kamera = TronCamera()
+    private var kameraOben = TronCamera()
+    private var kameraTP = TronCamera()
     //scene setup
     private var pointLight : PointLight
     private var pointLight2 : PointLight
@@ -69,7 +71,7 @@ public class Scene(private val window: GameWindow) {
         texture_diff.setTexParams(GL_REPEAT, GL_REPEAT, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR)
         texture_spec.setTexParams(GL_REPEAT, GL_REPEAT, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR)
 
-        val bodenMaterial = Material(texture_diff, texture_emit, texture_spec, 60.0f, Vector2f(64.0f, 64.0f))   //neuen Boden erstellen mit unseren Werten
+        val bodenMaterial = Material(texture_diff, texture_emit, texture_spec, 60.0f, Vector2f(1.0f, 1.0f))   //neuen Boden erstellen mit unseren Werten
 
         meshBoden = Mesh(objMesh.vertexData, objMesh.indexData, vertexAttributes, bodenMaterial)                        //bodenMaterial wird benötigt
         boden.list.add(meshBoden)
@@ -82,10 +84,15 @@ public class Scene(private val window: GameWindow) {
         pointLight.translateLocal(Vector3f(0.0f, 4.0f, 0.0f))
         spotLight.rotateLocal(Math.toRadians(-10.0f), Math.PI.toFloat(), 0.0f)
 
-        kamera.rotateLocal(Math.toRadians(-90.0f), 0.0f, 0.0f)
-        kamera.translateLocal(Vector3f(0.0f,0.0f,25.0f))
+        kamera = kameraOben
 
-        //kamera.parent = cycle
+        kameraOben.rotateLocal(Math.toRadians(-90.0f), 0.0f, 0.0f)
+        kameraOben.translateLocal(Vector3f(0.0f,0.0f,25.0f))
+
+        kameraTP.rotateLocal(Math.toRadians(-35f), 0f, 0f)
+        kameraTP.translateLocal(Vector3f(0f,0f,4f))
+
+        kameraTP.parent = cycle
         spotLight.parent = cycle
         pointLight.parent = cycle
     }
@@ -107,13 +114,13 @@ public class Scene(private val window: GameWindow) {
 
     fun update(dt: Float, t: Float) {
         if(window.getKeyState(GLFW_KEY_W)){
-            cycle.translateLocal(Vector3f(0.0f, 0.0f, -5*dt))
+            cycle.translateLocal(Vector3f(0.0f, 0.0f, -25*dt))
 
             if(window.getKeyState(GLFW_KEY_A)) {
-                cycle.rotateLocal(0.0f, Math.toRadians(60* dt), 0.0f)
+                cycle.rotateLocal(0.0f, Math.toRadians(100* dt), 0.0f)
             }
             if(window.getKeyState(GLFW_KEY_D)){
-                cycle.rotateLocal(0.0f, Math.toRadians(-60 * dt),0.0f)
+                cycle.rotateLocal(0.0f, Math.toRadians(-100 * dt),0.0f)
             }
         }
         if(window.getKeyState(GLFW_KEY_S)){
@@ -128,7 +135,15 @@ public class Scene(private val window: GameWindow) {
         }
     }
 
-    fun onKey(key: Int, scancode: Int, action: Int, mode: Int) {}
+    fun onKey(key: Int, scancode: Int, action: Int, mode: Int) {
+        if(window.getKeyState(GLFW_KEY_V)) {
+            if(kamera == kameraOben){
+                kamera = kameraTP
+            }else{
+                kamera = kameraOben
+            }
+        }
+    }
 
     fun onMouseMove(xpos: Double, ypos: Double) {
 
@@ -139,7 +154,7 @@ public class Scene(private val window: GameWindow) {
         //oldMousePosY = ypos
 
         if(bool){
-            kamera.rotateAroundPoint(0.0f, Math.toRadians(x.toFloat() * 0.002f), 0.0f, Vector3f(0.0f))
+            kameraOben.rotateAroundPoint(0.0f, Math.toRadians(x.toFloat() * 0.002f), 0.0f, Vector3f(0.0f))
         }
         bool = true
 
