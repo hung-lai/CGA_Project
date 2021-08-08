@@ -31,6 +31,7 @@ public class Scene(private val window: GameWindow) {
     private var kamera = TronCamera()
     private var kameraOben = TronCamera()
     private var kameraTP = TronCamera()
+    private var kameraFP = TronCamera()
     //scene setup
     private var pointLight : PointLight
     private var pointLight2 : PointLight
@@ -92,7 +93,11 @@ public class Scene(private val window: GameWindow) {
         kameraTP.rotateLocal(Math.toRadians(-35f), 0f, 0f)
         kameraTP.translateLocal(Vector3f(0f,0f,4f))
 
+        kameraFP.rotateLocal(Math.toRadians(-10f),0f,0f)
+        kameraFP.translateLocal(Vector3f(0f,2f,-1f))
+
         kameraTP.parent = cycle
+        kameraFP.parent = cycle
         spotLight.parent = cycle
         pointLight.parent = cycle
     }
@@ -140,7 +145,12 @@ public class Scene(private val window: GameWindow) {
             if(kamera == kameraOben){
                 kamera = kameraTP
             }else{
+                if(kamera == kameraTP){
+                kamera = kameraFP
+            }else{
                 kamera = kameraOben
+
+                }
             }
         }
     }
@@ -154,7 +164,7 @@ public class Scene(private val window: GameWindow) {
         //oldMousePosY = ypos
 
         if(bool){
-            kameraOben.rotateAroundPoint(0.0f, Math.toRadians(x.toFloat() * 0.002f), 0.0f, Vector3f(0.0f))
+            kamera.rotateAroundPoint(0.0f, Math.toRadians(x.toFloat() * 0.002f), 0.0f, Vector3f(0.0f))
         }
         bool = true
 
