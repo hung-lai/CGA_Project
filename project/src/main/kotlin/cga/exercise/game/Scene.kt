@@ -23,10 +23,10 @@ import kotlin.math.sin
 
 public class Scene(private val window: GameWindow) {
     //private val staticShader: ShaderProgram = ShaderProgram("assets/shaders/simple_vert.glsl", "assets/shaders/simple_frag.glsl")
-    private val staticShader1: ShaderProgram = ShaderProgram("assets/shaders/tron_vert.glsl", "assets/shaders/tron_frag.glsl")
+    private val staticShader1: ShaderProgram = ShaderProgram("project/assets/shaders/tron_vert.glsl", "project/assets/shaders/tron_frag.glsl")
     private var boden = Renderable() //aka Günther
-    private var cycle = ModelLoader.loadModel("assets/Light Cycle/Light Cycle/HQ_Movie cycle.obj", Math.toRadians(-90.0f),Math.toRadians(90.0f),0.0f)?: throw IllegalAccessException("Da is was nicht okay :(") //aka Dieter
-    private var cycle2 = ModelLoader.loadModel("assets/Light Cycle/Light Cycle/HQ_Movie cycle.obj", Math.toRadians(-90.0f),Math.toRadians(90.0f),0.0f)?: throw IllegalAccessException("Da is was nicht okay :(") //aka Dieter2
+    private var cycle = ModelLoader.loadModel("project/assets/Light Cycle/Light Cycle/HQ_Movie cycle.obj", Math.toRadians(-90.0f),Math.toRadians(90.0f),0.0f)?: throw IllegalAccessException("Da is was nicht okay :(") //aka Dieter
+    private var cycle2 = ModelLoader.loadModel("project/assets/Light Cycle/Light Cycle/HQ_Movie cycle.obj", Math.toRadians(-90.0f),Math.toRadians(90.0f),0.0f)?: throw IllegalAccessException("Da is was nicht okay :(") //aka Dieter2
     private var meshBoden : Mesh
     //private var meshKugel : Mesh
     private var kamera = TronCamera()
@@ -54,7 +54,7 @@ public class Scene(private val window: GameWindow) {
         glDepthFunc(GL_LESS); GLError.checkThrow()
 
         //load an object and create a mesh
-        val res = loadOBJ("assets/models/ground.obj")
+        val res = loadOBJ("project/assets/models/ground.obj")
         //Get the first mesh of the first object
         val objMesh: OBJLoader.OBJMesh = res.objects[0].meshes[0]
         //Create the mesh
@@ -65,9 +65,9 @@ public class Scene(private val window: GameWindow) {
         val vertexAttributes = arrayOf<VertexAttribute>(attrPos, attrTC, attrNorm)
         //meshBoden = Mesh(objMesh.vertexData, objMesh.indexData, vertexAttributes, bodenMaterial)
 
-        val texture_emit = Texture2D("assets/textures/ground_emit.png", true)
-        val texture_diff = Texture2D("assets/textures/ground_diff.png",true)
-        val texture_spec = Texture2D("assets/textures/ground_spec.png",true)
+        val texture_emit = Texture2D("project/assets/textures/ground_emit.png", true)
+        val texture_diff = Texture2D("project/assets/textures/ground_diff.png",true)
+        val texture_spec = Texture2D("project/assets/textures/ground_spec.png",true)
 
         //texture_emit.setTexParams(GL_NEAREST,GL_NEAREST, GL_NEAREST_MIPMAP_NEAREST, GL_NEAREST)                       //moire-Effekt
         texture_emit.setTexParams(GL_REPEAT,GL_REPEAT, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR)                              //GL_Repeat werte hinterm Komma werden genutzt. Linear =
