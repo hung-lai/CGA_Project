@@ -26,6 +26,7 @@ public class Scene(private val window: GameWindow) {
     private val staticShader1: ShaderProgram = ShaderProgram("assets/shaders/tron_vert.glsl", "assets/shaders/tron_frag.glsl")
     private var boden = Renderable() //aka Günther
     private var cycle = ModelLoader.loadModel("assets/Light Cycle/Light Cycle/HQ_Movie cycle.obj", Math.toRadians(-90.0f),Math.toRadians(90.0f),0.0f)?: throw IllegalAccessException("Da is was nicht okay :(") //aka Dieter
+    private var cycle2 = ModelLoader.loadModel("assets/Light Cycle/Light Cycle/HQ_Movie cycle.obj", Math.toRadians(-90.0f),Math.toRadians(90.0f),0.0f)?: throw IllegalAccessException("Da is was nicht okay :(") //aka Dieter2
     private var meshBoden : Mesh
     //private var meshKugel : Mesh
     private var kamera = TronCamera()
@@ -40,6 +41,7 @@ public class Scene(private val window: GameWindow) {
     private var oldMousePosX : Double = -1.0
     private var oldMousePosY : Double = -1.0
     private var bool: Boolean = false
+
     init {
 
         //initial opengl state
@@ -82,6 +84,11 @@ public class Scene(private val window: GameWindow) {
         spotLight = SpotLight(Vector3f(0.0f, 1.0f,-2.0f), Vector3f(1.0f))
 
         cycle.scaleLocal(Vector3f(0.8f))
+        cycle.translateLocal(Vector3f(15f,0f,0f))
+
+        cycle2.scaleLocal(Vector3f(0.8f))
+        cycle2.translateLocal(Vector3f(17.0f,-10.0f,0.0f))
+
         pointLight.translateLocal(Vector3f(0.0f, 4.0f, 0.0f))
         spotLight.rotateLocal(Math.toRadians(-10.0f), Math.PI.toFloat(), 0.0f)
 
@@ -100,6 +107,15 @@ public class Scene(private val window: GameWindow) {
         kameraFP.parent = cycle
         spotLight.parent = cycle
         pointLight.parent = cycle
+
+
+
+        //Strecke Fahren lassen
+        if(cycle2.getZAxis() == Vector3f(-12.0f)){
+            cycle2.rotateLocal(Math.toRadians(90f),0f,0f)
+            println("kurve")
+            }
+
     }
 
     fun render(dt: Float, t: Float) {
@@ -111,6 +127,7 @@ public class Scene(private val window: GameWindow) {
 
         staticShader1.setUniform("sceneColor",Vector3f(abs(sin(t/1)),abs(sin(t/3)),abs(sin(t/2))))          //statemaschine
         cycle.render(staticShader1)
+        cycle2.render(staticShader1)
         pointLight.bind(staticShader1, "cyclePoint")
         pointLight2.bind(staticShader1, "ecke")
         spotLight.bind(staticShader1, "cycleSpot", kamera.getCalculateViewMatrix())
@@ -138,6 +155,13 @@ public class Scene(private val window: GameWindow) {
                 cycle.rotateLocal(0.0f, Math.toRadians(-60 * dt), 0.0f)
             }
         }
+        if(window.getKeyState(GLFW_KEY_UP)){
+            cycle2.translateLocal(Vector3f(0.0f, 0.0f, -25*dt))
+        }
+        if(window.getKeyState(GLFW_KEY_DOWN)){
+            cycle2.translateLocal(Vector3f(0.0f, 0.0f,25 * dt))
+        }
+        println(cycle.getWorldPosition())
     }
 
     fun onKey(key: Int, scancode: Int, action: Int, mode: Int) {
@@ -152,6 +176,9 @@ public class Scene(private val window: GameWindow) {
 
                 }
             }
+        }
+        if(window.getKeyState(GLFW_KEY_P)){
+            cycle2.translateGlobal(Vector3f(0.0f,8f,0.0f))
         }
     }
 
