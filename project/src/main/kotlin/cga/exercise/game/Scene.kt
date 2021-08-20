@@ -25,10 +25,9 @@ public class Scene(private val window: GameWindow) {
     //private val staticShader: ShaderProgram = ShaderProgram("assets/shaders/simple_vert.glsl", "assets/shaders/simple_frag.glsl")
     private val staticShader1: ShaderProgram = ShaderProgram("project/assets/shaders/tron_vert.glsl", "project/assets/shaders/tron_frag.glsl")
     private var boden = Renderable() //aka Günther
-    private var cycle = ModelLoader.loadModel("project/assets/Light Cycle/Light Cycle/HQ_Movie cycle.obj", Math.toRadians(-90.0f),Math.toRadians(90.0f),0.0f)?: throw IllegalAccessException("Da is was nicht okay :(") //aka Dieter
-    private var cycle2 = ModelLoader.loadModel("project/assets/Light Cycle/Light Cycle/HQ_Movie cycle.obj", Math.toRadians(-90.0f),Math.toRadians(90.0f),0.0f)?: throw IllegalAccessException("Da is was nicht okay :(") //aka Dieter2
+    private var car = ModelLoader.loadModel("project/assets/car/car.obj", Math.toRadians(0.0f),Math.toRadians(180.0f),0.0f)?: throw IllegalAccessException("Da is was nicht okay :(") //aka Dieter
+    private var car2 = ModelLoader.loadModel("project/assets/car/car.obj", Math.toRadians(0.0f),Math.toRadians(180.0f),0.0f)?: throw IllegalAccessException("Da is was nicht okay :(") //aka Dieter2
     private var meshBoden : Mesh
-    //private var meshKugel : Mesh
     private var kamera = TronCamera()
     private var kameraOben = TronCamera()
     private var kameraTP = TronCamera()
@@ -42,6 +41,12 @@ public class Scene(private val window: GameWindow) {
     private var oldMousePosY : Double = -1.0
     private var bool: Boolean = false
 
+    //private var carMesh : Mesh
+    //private var car = Renderable()
+
+    //private var car2Mesh : Mesh
+    //private var car2 = Renderable()
+
     init {
 
         //initial opengl state
@@ -54,7 +59,7 @@ public class Scene(private val window: GameWindow) {
         glDepthFunc(GL_LESS); GLError.checkThrow()
 
         //load an object and create a mesh
-        val res = loadOBJ("project/assets/models/ground.obj")
+        val res = loadOBJ("project/assets/models/track.obj")
         //Get the first mesh of the first object
         val objMesh: OBJLoader.OBJMesh = res.objects[0].meshes[0]
         //Create the mesh
@@ -65,7 +70,7 @@ public class Scene(private val window: GameWindow) {
         val vertexAttributes = arrayOf<VertexAttribute>(attrPos, attrTC, attrNorm)
         //meshBoden = Mesh(objMesh.vertexData, objMesh.indexData, vertexAttributes, bodenMaterial)
 
-        val texture_emit = Texture2D("project/assets/textures/ground_emit.png", true)
+        val texture_emit = Texture2D("project/assets/textures/ground_emit.png",true)
         val texture_diff = Texture2D("project/assets/textures/ground_diff.png",true)
         val texture_spec = Texture2D("project/assets/textures/ground_spec.png",true)
 
@@ -73,6 +78,20 @@ public class Scene(private val window: GameWindow) {
         texture_emit.setTexParams(GL_REPEAT,GL_REPEAT, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR)                              //GL_Repeat werte hinterm Komma werden genutzt. Linear =
         texture_diff.setTexParams(GL_REPEAT, GL_REPEAT, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR)
         texture_spec.setTexParams(GL_REPEAT, GL_REPEAT, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR)
+
+
+        //val carMaterial = Material(texture_diff, texture_emit, texture_spec, 60.0f, Vector2f(1.0f, 1.0f))
+
+        //val resCar = OBJLoader.loadOBJ("project/assets/car/car.obj")
+        //val carObj = resCar.objects[0].meshes[0]
+        //carMesh = Mesh(carObj.vertexData, carObj.indexData, vertexAttributes, carMaterial)
+        //car.list.add(carMesh)
+
+        //val car2Material = Material(texture_diff, texture_emit, texture_spec, 60.0f, Vector2f(1.0f, 1.0f))
+        //val resCar2 = OBJLoader.loadOBJ("project/assets/car/car.obj")
+        //val car2Obj = resCar.objects[0].meshes[0]
+        //car2Mesh = Mesh(carObj.vertexData, car2Obj.indexData, vertexAttributes, car2Material)
+        //car2.list.add(car2Mesh)
 
         val bodenMaterial = Material(texture_diff, texture_emit, texture_spec, 60.0f, Vector2f(1.0f, 1.0f))   //neuen Boden erstellen mit unseren Werten
 
@@ -83,11 +102,11 @@ public class Scene(private val window: GameWindow) {
         pointLight2 = PointLight(Vector3f(20.0f, 4.0f,20.0f),Vector3f(1.0f,1.0f,1.0f), Vector3f(1.0f,0.5f,0.1f))
         spotLight = SpotLight(Vector3f(0.0f, 1.0f,-2.0f), Vector3f(1.0f))
 
-        cycle.scaleLocal(Vector3f(0.8f))
-        cycle.translateLocal(Vector3f(15f,0f,0f))
+        car.scaleLocal(Vector3f(0.8f))
+        car.translateLocal(Vector3f(15f,1f,0f))
 
-        cycle2.scaleLocal(Vector3f(0.8f))
-        cycle2.translateLocal(Vector3f(17.0f,-10.0f,0.0f))
+        car2.scaleLocal(Vector3f(0.8f))
+        car2.translateLocal(Vector3f(17.0f,-10.0f,0.0f))
 
         pointLight.translateLocal(Vector3f(0.0f, 4.0f, 0.0f))
         spotLight.rotateLocal(Math.toRadians(-10.0f), Math.PI.toFloat(), 0.0f)
@@ -103,16 +122,16 @@ public class Scene(private val window: GameWindow) {
         kameraFP.rotateLocal(Math.toRadians(-10f),0f,0f)
         kameraFP.translateLocal(Vector3f(0f,2f,-1f))
 
-        kameraTP.parent = cycle
-        kameraFP.parent = cycle
-        spotLight.parent = cycle
-        pointLight.parent = cycle
+        kameraTP.parent = car
+        kameraFP.parent = car
+        spotLight.parent = car
+        pointLight.parent = car
 
 
 
         //Strecke Fahren lassen
-        if(cycle2.getZAxis() == Vector3f(-12.0f)){
-            cycle2.rotateLocal(Math.toRadians(90f),0f,0f)
+        if(car2.getZAxis() == Vector3f(-12.0f)){
+            car2.rotateLocal(Math.toRadians(90f),0f,0f)
             println("kurve")
             }
 
@@ -126,8 +145,8 @@ public class Scene(private val window: GameWindow) {
         boden.render(staticShader1)
 
         staticShader1.setUniform("sceneColor",Vector3f(abs(sin(t/1)),abs(sin(t/3)),abs(sin(t/2))))          //statemaschine
-        cycle.render(staticShader1)
-        cycle2.render(staticShader1)
+        car.render(staticShader1)
+        car2.render(staticShader1)
         pointLight.bind(staticShader1, "cyclePoint")
         pointLight2.bind(staticShader1, "ecke")
         spotLight.bind(staticShader1, "cycleSpot", kamera.getCalculateViewMatrix())
@@ -136,32 +155,32 @@ public class Scene(private val window: GameWindow) {
 
     fun update(dt: Float, t: Float) {
         if(window.getKeyState(GLFW_KEY_W)){
-            cycle.translateLocal(Vector3f(0.0f, 0.0f, -25*dt))
+            car.translateLocal(Vector3f(0.0f, 0.0f, -40*dt))
 
             if(window.getKeyState(GLFW_KEY_A)) {
-                cycle.rotateLocal(0.0f, Math.toRadians(100* dt), 0.0f)
+                car.rotateLocal(0.0f, Math.toRadians(100* dt), 0.0f)
             }
             if(window.getKeyState(GLFW_KEY_D)){
-                cycle.rotateLocal(0.0f, Math.toRadians(-100 * dt),0.0f)
+                car.rotateLocal(0.0f, Math.toRadians(-100 * dt),0.0f)
             }
         }
         if(window.getKeyState(GLFW_KEY_S)){
-            cycle.translateLocal(Vector3f(0.0f, 0.0f,5 * dt))
+            car.translateLocal(Vector3f(0.0f, 0.0f,5 * dt))
 
             if(window.getKeyState(GLFW_KEY_D)){
-                cycle.rotateLocal(0.0f, Math.toRadians(60 * dt), 0.0f)
+                car.rotateLocal(0.0f, Math.toRadians(60 * dt), 0.0f)
             }
             if(window.getKeyState(GLFW_KEY_A)){
-                cycle.rotateLocal(0.0f, Math.toRadians(-60 * dt), 0.0f)
+                car.rotateLocal(0.0f, Math.toRadians(-60 * dt), 0.0f)
             }
         }
         if(window.getKeyState(GLFW_KEY_UP)){
-            cycle2.translateLocal(Vector3f(0.0f, 0.0f, -25*dt))
+            car2.translateLocal(Vector3f(0.0f, 0.0f, -25*dt))
         }
         if(window.getKeyState(GLFW_KEY_DOWN)){
-            cycle2.translateLocal(Vector3f(0.0f, 0.0f,25 * dt))
+            car2.translateLocal(Vector3f(0.0f, 0.0f,25 * dt))
         }
-        println(cycle.getWorldPosition())
+        println(car2.getWorldPosition())
     }
 
     fun onKey(key: Int, scancode: Int, action: Int, mode: Int) {
@@ -178,7 +197,7 @@ public class Scene(private val window: GameWindow) {
             }
         }
         if(window.getKeyState(GLFW_KEY_P)){
-            cycle2.translateGlobal(Vector3f(0.0f,8f,0.0f))
+            car2.translateGlobal(Vector3f(0.0f,9f,0.0f))
         }
     }
 
