@@ -28,6 +28,7 @@ public class Scene(private val window: GameWindow) {
     private var car = ModelLoader.loadModel("project/assets/car/car.obj", Math.toRadians(0.0f),Math.toRadians(180.0f),0.0f)?: throw IllegalAccessException("Da is was nicht okay :(") //aka Dieter
     private var car2 = ModelLoader.loadModel("project/assets/car/car.obj", Math.toRadians(0.0f),Math.toRadians(180.0f),0.0f)?: throw IllegalAccessException("Da is was nicht okay :(") //aka Dieter2
     private var meshBoden : Mesh
+    //private var meshKugel : Mesh
     private var kamera = TronCamera()
     private var kameraOben = TronCamera()
     private var kameraTP = TronCamera()
@@ -41,6 +42,12 @@ public class Scene(private val window: GameWindow) {
     private var oldMousePosY : Double = -1.0
     private var bool: Boolean = false
 
+    //private var cp1 = Checkpoint()
+
+    private var i = 0
+    private var kurve = 0
+    private var runde = 0
+    //private var trackPos = Vector3f(0f,0f,0f)
     //private var carMesh : Mesh
     //private var car = Renderable()
 
@@ -50,7 +57,7 @@ public class Scene(private val window: GameWindow) {
     init {
 
         //initial opengl state
-        glClearColor(0.0f, 0.0f, 0.0f, 1.0f); GLError.checkThrow() //schwarz
+        glClearColor(1.0f, 1.0f, 1.0f, 1.0f); GLError.checkThrow() //schwarz
         glDisable(GL_CULL_FACE); GLError.checkThrow()
         glEnable(GL_CULL_FACE)
         glFrontFace(GL_CCW); GLError.checkThrow()
@@ -103,10 +110,10 @@ public class Scene(private val window: GameWindow) {
         spotLight = SpotLight(Vector3f(0.0f, 1.0f,-2.0f), Vector3f(1.0f))
 
         car.scaleLocal(Vector3f(0.8f))
-        car.translateLocal(Vector3f(15f,1f,0f))
+        car.translateLocal(Vector3f(-105.0f,1.002f, -40.45f))
 
         car2.scaleLocal(Vector3f(0.8f))
-        car2.translateLocal(Vector3f(17.0f,-10.0f,0.0f))
+        car2.translateLocal(Vector3f(-105.0f,-1.248f, -40.45f))
 
         pointLight.translateLocal(Vector3f(0.0f, 4.0f, 0.0f))
         spotLight.rotateLocal(Math.toRadians(-10.0f), Math.PI.toFloat(), 0.0f)
@@ -128,13 +135,7 @@ public class Scene(private val window: GameWindow) {
         pointLight.parent = car
 
 
-
-        //Strecke Fahren lassen
-        if(car2.getZAxis() == Vector3f(-12.0f)){
-            car2.rotateLocal(Math.toRadians(90f),0f,0f)
-            println("kurve")
-            }
-
+        car.getPosition()
     }
 
     fun render(dt: Float, t: Float) {
@@ -175,12 +176,260 @@ public class Scene(private val window: GameWindow) {
             }
         }
         if(window.getKeyState(GLFW_KEY_UP)){
-            car2.translateLocal(Vector3f(0.0f, 0.0f, -25*dt))
+            car2.translateLocal(Vector3f(0.0f, 0.0f, -50*dt))
         }
         if(window.getKeyState(GLFW_KEY_DOWN)){
-            car2.translateLocal(Vector3f(0.0f, 0.0f,25 * dt))
+            car2.translateLocal(Vector3f(0.0f, 0.0f,50 * dt))
         }
-        println(car2.getWorldPosition())
+        //println("Auto2"+car2.getPosition())
+        //println("Auto1"+car.getPosition())
+        //println(car2.getPosition().distance(car.getPosition()))
+
+        if (i == 1) {
+            if (kurve == 0) {
+                if (car2.getPosition().distance(-84f, 1.002f, -53f) <= 1f) {
+                    println(kurve)
+                    car2.rotateLocal(0f, Math.toRadians(300f), 0f)
+                    kurve = 1
+                }
+            } else {
+                if (kurve == 1) {
+                    if (car2.getPosition().distance(-69.57f, 1.002f, -60.36f) <= 1f) {
+                        println(kurve)
+                        car2.rotateLocal(0f, Math.toRadians(300f), 0f)
+                        kurve = 2
+                    }
+                } else {
+                    if (kurve == 2) {
+                        if (car2.getPosition().distance(-55.57f, 1.002f, -51.28f) <= 1f) {
+                            println(kurve)
+                            car2.rotateLocal(0f, Math.toRadians(-30f), 0f)
+                            kurve = 3
+                        }
+                    } else {
+                        if (kurve == 3) {
+                            if (car2.getPosition().distance(-7.848f, 1.002f, 32f) <= 1f) {
+                                println(kurve)
+                                car2.rotateLocal(0f, Math.toRadians(30f), 0f)
+                                kurve = 4
+                            }
+                        } else {
+                            if (kurve == 4) {
+                                if (car2.getPosition().distance(10.71f, 1.002f, 42.94f) <= 1f) {
+                                    println(kurve)
+                                    car2.rotateLocal(0f, Math.toRadians(30f), 0f)
+                                    kurve = 5
+                                }
+                            }else {
+                                if (kurve == 5) {
+                                    if (car2.getPosition().distance(18.52f, 1.002f, 42.11f) <= 1f) {
+                                        println(kurve)
+                                        car2.rotateLocal(0f, Math.toRadians(30f), 0f)
+                                        kurve = 6
+                                    }
+                                }else {
+                                    if (kurve == 6) {
+                                        if (car2.getPosition().distance(31.67f, 1.002f, 33.95f) <= 1f) {
+                                            println(kurve)
+                                            car2.rotateLocal(0f, Math.toRadians(30f), 0f)
+                                            kurve = 7
+                                        }
+                                    }else {
+                                        if (kurve == 7) {
+                                            if (car2.getPosition().distance(58.92f, 1.002f, -13.93f) <= 1f) {
+                                                println(kurve)
+                                                car2.rotateLocal(0f, Math.toRadians(-30f), 0f)
+                                                kurve = 8
+                                            }
+                                        }else {
+                                            if (kurve == 8) {
+                                                if (car2.getPosition().distance(68.24f, 1.002f, -18.73f) <= 1f) {
+                                                    println(kurve)
+                                                    car2.rotateLocal(0f, Math.toRadians(-30f), 0f)
+                                                    kurve = 9
+                                                }
+                                            }else {
+                                                if (kurve == 9) {
+                                                    if (car2.getPosition().distance(76.33f, 1.002f, -18.40f) <= 1f) {
+                                                        println(kurve)
+                                                        car2.rotateLocal(0f, Math.toRadians(-30f), 0f)
+                                                        kurve = 10
+                                                    }
+                                                }else {
+                                                    if (kurve == 10) {
+                                                        if (car2.getPosition().distance(83.45f, 1.002f, -13.90f) <= 1f) {
+                                                            println(kurve)
+                                                            car2.rotateLocal(0f, Math.toRadians(-30f), 0f)
+                                                            kurve = 11
+                                                        }
+                                                    }else {
+                                                        if (kurve == 11) {
+                                                            if (car2.getPosition().distance(88.09f, 1.002f, -4.871f) <= 1f) {
+                                                                println(kurve)
+                                                                car2.rotateLocal(0f, Math.toRadians(-30f), 0f)
+                                                                kurve = 12
+                                                            }
+                                                        }else {
+                                                            if (kurve == 12) {
+                                                                if (car2.getPosition().distance(87.75f, 1.002f, -1.449f) <= 1f) {
+                                                                    println(kurve)
+                                                                    car2.rotateLocal(0f, Math.toRadians(-30f), 0f)
+                                                                    kurve = 13
+                                                                }
+                                                            }else {
+                                                                if (kurve == 13) {
+                                                                    if (car2.getPosition().distance(54.26f, 1.002f, 55.57f) <= 1f) {
+                                                                        println(kurve)
+                                                                        car2.rotateLocal(0f, Math.toRadians(-60f), 0f)
+                                                                        kurve = 14
+                                                                    }
+                                                                }else {
+                                                                    if (kurve == 14) {
+                                                                        if (car2.getPosition().distance(-69.58f, 1.002f, 54.71f) <= 1f) {
+                                                                            println(kurve)
+                                                                            car2.rotateLocal(0f, Math.toRadians(-30f), 0f)
+                                                                            kurve = 15
+                                                                        }
+                                                                    }else {
+                                                                        if (kurve == 15) {
+                                                                            if (car2.getPosition().distance(-82f, 1.002f, 47.04f) <= 1f) {
+                                                                                println(kurve)
+                                                                                car2.rotateLocal(0f, Math.toRadians(-30f), 0f)
+                                                                                kurve = 16
+                                                                            }
+                                                                        }else {
+                                                                            if (kurve == 16) {
+                                                                                if (car2.getPosition().distance(-84.99f, 1.002f, 41.19f) <= 1f) {
+                                                                                    println(kurve)
+                                                                                    car2.rotateLocal(0f, Math.toRadians(-30f), 0f)
+                                                                                    kurve = 17
+                                                                                }
+                                                                            }else {
+                                                                                if (kurve == 17) {
+                                                                                    if (car2.getPosition().distance(-84.66f, 1.002f, 31.77f) <= 1f) {
+                                                                                        println(kurve)
+                                                                                        car2.rotateLocal(0f, Math.toRadians(-30f), 0f)
+                                                                                        kurve = 18
+                                                                                    }
+                                                                                }else {
+                                                                                    if (kurve == 18) {
+                                                                                        if (car2.getPosition().distance(-78.66f, 1.002f, 22.38f) <= 1f) {
+                                                                                            println(kurve)
+                                                                                            car2.rotateLocal(0f, Math.toRadians(-30f), 0f)
+                                                                                            kurve = 19
+                                                                                        }
+                                                                                    }else {
+                                                                                        if (kurve == 19) {
+                                                                                            if (car2.getPosition().distance(-76.56f, 1.002f, 21.74f) <= 1f) {
+                                                                                                println(kurve)
+                                                                                                car2.rotateLocal(0f, Math.toRadians(-30f), 0f)
+                                                                                                kurve = 20
+                                                                                            }
+                                                                                        }else {
+                                                                                            if (kurve == 20) {
+                                                                                                if (car2.getPosition().distance(-60.80f, 1.002f, 22.08f) <= 1f) {
+                                                                                                    println(kurve)
+                                                                                                    car2.rotateLocal(0f, Math.toRadians(30f), 0f)
+                                                                                                    kurve = 21
+                                                                                                }
+                                                                                            }else {
+                                                                                                if (kurve == 21) {
+                                                                                                    if (car2.getPosition().distance(-52.23f, 1.002f, 16.74f) <= 1f) {
+                                                                                                        println(kurve)
+                                                                                                        car2.rotateLocal(0f, Math.toRadians(30f), 0f)
+                                                                                                        kurve = 22
+                                                                                                    }
+                                                                                                }else {
+                                                                                                    if (kurve == 22) {
+                                                                                                        if (car2.getPosition().distance(-42.64f, 1.002f, -0.5334f) <= 1f) {
+                                                                                                            println(kurve)
+                                                                                                            car2.rotateLocal(0f, Math.toRadians(30f), 0f)
+                                                                                                            kurve = 23
+                                                                                                        }
+                                                                                                    }else {
+                                                                                                        if (kurve == 23) {
+                                                                                                            if (car2.getPosition().distance(-42.98f, 1.002f, -8.956f) <= 1f) {
+                                                                                                                println(kurve)
+                                                                                                                car2.rotateLocal(0f, Math.toRadians(30f), 0f)
+                                                                                                                kurve = 24
+                                                                                                            }
+                                                                                                        }else {
+                                                                                                            if (kurve == 24) {
+                                                                                                                if (car2.getPosition().distance(-51.81f, 1.002f, -23.26f) <= 1f) {
+                                                                                                                    println(kurve)
+                                                                                                                    car2.rotateLocal(0f, Math.toRadians(30f), 0f)
+                                                                                                                    kurve = 25
+                                                                                                                }
+                                                                                                            }else {
+                                                                                                                if (kurve == 25) {
+                                                                                                                    if (car2.getPosition().distance(-59.56f, 1.002f, -27.35f) <= 1f) {
+                                                                                                                        println(kurve)
+                                                                                                                        car2.rotateLocal(0f, Math.toRadians(30f), 0f)
+                                                                                                                        kurve = 26
+                                                                                                                    }
+                                                                                                                }else {
+                                                                                                                    if (kurve == 26) {
+                                                                                                                        if (car2.getPosition().distance(-76.32f, 1.002f, -27.01f) <= 1f) {
+                                                                                                                            println(kurve)
+                                                                                                                            car2.rotateLocal(0f, Math.toRadians(-30f), 0f)
+                                                                                                                            kurve = 27
+                                                                                                                        }
+                                                                                                                    }else {
+                                                                                                                        if (kurve == 27) {
+                                                                                                                            if (car2.getPosition().distance(-83.44f, 1.002f, -31.51f) <=0.1f) {
+                                                                                                                                println(kurve)
+                                                                                                                                car2.rotateLocal(0f, Math.toRadians(-60f), 0f)
+                                                                                                                                kurve = 0
+                                                                                                                            }
+                                                                                                                        }//else {
+                                                                                                                        //    if (kurve == 28) {
+                                                                                                                        //        if (car2.getPosition().distance(-83.51f, 1.002f, -34.63f) <= 1f) {
+                                                                                                                        //            println(kurve)
+                                                                                                                        //            car2.rotateLocal(0f, Math.toRadians(-30f), 0f)
+                                                                                                                        //            kurve = 0
+                                                                                                                        //            runde++
+                                                                                                                        //        }
+                                                                                                                        //    }
+                                                                                                                        //}
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            }
+                                                                                                        }
+                                                                                                    }
+                                                                                                }
+                                                                                            }
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        //if(car.getPosition().distance(car2.getPosition())<=1f){
+            //println("Du hast verkackt")
+        //}
+       if(runde!=0) {
+           if(car2.getPosition().distance(-84.0f, 1.002f, -32.36f) == 0f) {
+               car2.rotateLocal(0f, Math.toRadians(-30f), 0f)
+               //car2.nullPosition(
+               //car2.translateGlobal(Vector3f(-84.0f, 1.002f, -32.36f))
+               println("Runde " + runde)
+           }
+       }
     }
 
     fun onKey(key: Int, scancode: Int, action: Int, mode: Int) {
@@ -196,8 +445,11 @@ public class Scene(private val window: GameWindow) {
                 }
             }
         }
-        if(window.getKeyState(GLFW_KEY_P)){
-            car2.translateGlobal(Vector3f(0.0f,9f,0.0f))
+        if(i==0) {
+            if (window.getKeyState(GLFW_KEY_P)) {
+                car2.translateGlobal(Vector3f(0.0f, 2f, 0.0f))
+                i = 1
+            }
         }
     }
 
