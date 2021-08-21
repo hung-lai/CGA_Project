@@ -47,6 +47,8 @@ public class Scene(private val window: GameWindow) {
     private var i = 0
     private var kurve = 0
     private var runde = 0
+    private var aktuellePosition = Vector3f(0f,0f,0f)
+    private var h = 0
     //private var trackPos = Vector3f(0f,0f,0f)
     //private var carMesh : Mesh
     //private var car = Renderable()
@@ -324,6 +326,7 @@ public class Scene(private val window: GameWindow) {
                                                                                                 println(kurve)
                                                                                                 car2.rotateLocal(0f, Math.toRadians(-30f), 0f)
                                                                                                 kurve = 20
+                                                                                                h=1
                                                                                             }
                                                                                         }else {
                                                                                             if (kurve == 20) {
@@ -376,10 +379,11 @@ public class Scene(private val window: GameWindow) {
                                                                                                                         }
                                                                                                                     }else {
                                                                                                                         if (kurve == 27) {
-                                                                                                                            if (car2.getPosition().distance(-83.44f, 1.002f, -31.51f) <=0.1f) {
+                                                                                                                            if (car2.getPosition().distance(-83.44f, 1.002f, -31.51f) <=1f) {
                                                                                                                                 println(kurve)
                                                                                                                                 car2.rotateLocal(0f, Math.toRadians(-60f), 0f)
                                                                                                                                 kurve = 0
+                                                                                                                                runde++
                                                                                                                             }
                                                                                                                         }//else {
                                                                                                                         //    if (kurve == 28) {
@@ -423,11 +427,17 @@ public class Scene(private val window: GameWindow) {
             //println("Du hast verkackt")
         //}
        if(runde!=0) {
-           if(car2.getPosition().distance(-84.0f, 1.002f, -32.36f) == 0f) {
-               car2.rotateLocal(0f, Math.toRadians(-30f), 0f)
-               //car2.nullPosition(
-               //car2.translateGlobal(Vector3f(-84.0f, 1.002f, -32.36f))
-               println("Runde " + runde)
+           if(h!=0){
+                if(car2.getPosition().distance(-84.0f, 1.002f, -32.36f) <= 2f) {
+                    //car2.rotateLocal(0f, Math.toRadians(-30f), 0f)
+                    aktuellePosition = car2.getPosition()
+                    aktuellePosition.negate()
+                    car2.translateLocal(aktuellePosition)
+                    car2.translateLocal(Vector3f(-84.0f, 1.002f, -32.36f))
+                    //car2.translateGlobal(Vector3f(-84.0f, 1.002f, -32.36f))
+                    println("Runde " + runde)
+                    h=0
+                }
            }
        }
     }
