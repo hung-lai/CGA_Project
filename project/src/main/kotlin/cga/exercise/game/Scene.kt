@@ -70,7 +70,7 @@ public class Scene(private val window: GameWindow) {
         val vertexAttributes = arrayOf<VertexAttribute>(attrPos, attrTC, attrNorm)
         //meshBoden = Mesh(objMesh.vertexData, objMesh.indexData, vertexAttributes, bodenMaterial)
 
-        val texture_emit = Texture2D("project/assets/textures/ground_emit.png",true)
+        val texture_emit = Texture2D("project/assets/textures/grau.png",true)
         val texture_diff = Texture2D("project/assets/textures/ground_diff.png",true)
         val texture_spec = Texture2D("project/assets/textures/ground_spec.png",true)
 
@@ -114,7 +114,7 @@ public class Scene(private val window: GameWindow) {
         kamera = kameraOben
 
         kameraOben.rotateLocal(Math.toRadians(-90.0f), 0.0f, 0.0f)
-        kameraOben.translateLocal(Vector3f(0.0f,0.0f,25.0f))
+        kameraOben.translateLocal(Vector3f(0.0f,0.0f,75.0f))
 
         kameraTP.rotateLocal(Math.toRadians(-35f), 0f, 0f)
         kameraTP.translateLocal(Vector3f(0f,0f,4f))
