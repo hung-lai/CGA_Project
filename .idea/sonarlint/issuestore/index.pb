@@ -13,9 +13,15 @@ O
 project/assets/models/track.mtl,d\6\d6b4d70c96d0eb86143c2d78533d6b9b08682fd2
 O
 project/assets/models/track.obj,d\a\da65e912895fabedd401e1b2c4e8c3e5c6ce22d4
-9
-	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
-\
-,project/src/main/kotlin/cga/exercise/main.kt,0\8\08371c419fe7c479992f3351299af930061ca305
-s
-Cproject/src/main/kotlin/cga/exercise/components/light/PointLight.kt,c\d\cd65f326bda04e176c11eab4c3b2fd3ddaee12fb
+v
+Fproject/src/main/kotlin/cga/exercise/components/geometry/Renderable.kt,2\3\23006120710a1975343a1bb808b6ad405c9869d0
+P
+ project/assets/models/ground.obj,8\0\80f8a94140085c5ac284a06899d9a40f069c01e3
+P
+ project/assets/models/sphere.obj,7\6\7681ea573dc2d84ae1123d3469c14250dee71392
+w
+Gproject/src/main/kotlin/cga/exercise/components/shader/ShaderProgram.kt,b\6\b607afd8e508264892caa69b5b39a6d914285fc3
+P
+ project/assets/models/track1.mtl,e\d\ed9214df07fe5d01a2ad7eadeaccc6c00d98dfbc
+P
+ project/assets/models/track1.obj,f\b\fb55987eb68cfa36ee4a1296763ec6bb7ff07da5
