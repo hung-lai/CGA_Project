@@ -13,21 +13,19 @@ Bei starker Ungleicheit der Features behalten wir uns eine individuelle Notenver
 
 - Strecke
 - Fahrzeug
-- 
-
-
-
-
-
-
-
+- Spotlights
+- Streetlights
+- Checkpoints
+- Beschleunigung
+- Zeit
+- 2 Spieler
 
 Liste (nice to have)
 
--	Komplexere Strecken (mehr als ein Oval)
--	Beleuchtungsmodell mit Schatten
--	Komplexes Fahrzeugmodell (evtl. Formel 1 Auto)
--	1st-Person View & Top Down View
-- Minimap 
+-	Komplexere Strecken (mehr als ein Oval) ✓
+-	Beleuchtungsmodell mit Schatten 
+-	Komplexes Fahrzeugmodell (evtl. Formel 1 Auto) ✓
+-	1st-Person View & Top Down View ✓
+- Minimap  
 - 2tes Fahrzeug für 2ten Spieler (Kollision möglich)
 
