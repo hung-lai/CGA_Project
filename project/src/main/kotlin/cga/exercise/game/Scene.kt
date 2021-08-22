@@ -128,10 +128,10 @@ public class Scene(private val window: GameWindow) {
         //spotLightR = SpotLight(Vector3f(1.0f, 1.0f,-2.0f), Vector3f(1.0f))
 
         car.scaleLocal(Vector3f(0.8f))
-        car.translateLocal(Vector3f(-110.0f,1.002f, -40.45f))
+        car.translateLocal(Vector3f(-117.0f,1.002f, -45.45f))
 
         car2.scaleLocal(Vector3f(0.8f))
-        car2.translateLocal(Vector3f(-105.0f,-1.248f, -40.45f))
+        car2.translateLocal(Vector3f(-105.0f,-1.248f, -45.45f))
 
         //pointLight.translateLocal(Vector3f(0.0f, 4.0f, 0.0f))
         spotLight.rotateLocal(Math.toRadians(-10.0f), Math.PI.toFloat(), 0.0f)
@@ -210,19 +210,19 @@ public class Scene(private val window: GameWindow) {
             if(speed2!=0f){
                 car2.translateLocal(Vector3f(0.0f, 0.0f, speed2*dt))
             speed2++
-        }
+            }
         }
         if(window.getKeyState(GLFW_KEY_DOWN)){
             car2.translateLocal(Vector3f(0.0f, 0.0f,50 * dt))
         }
         //println("Auto2"+car2.getPosition())
-        //println("Auto1"+car.getPosition())
+        println("Auto1"+car.getPosition())
         //println(car2.getPosition().distance(car.getPosition()))
 
         if (drehungFahrzeug1 == 0) {
-            if (car.getPosition().distance(-88f, 0.8016f, -57.03f) <= 1f) {
+            if (car.getPosition().distance(-93.60f, 0.8016f, -47.47f) <= 1f) {
                 println(drehungFahrzeug1)
-                car.rotateLocal(0f, Math.toRadians(300f), 0f)
+                car.rotateLocal(0f, Math.toRadians(-30f), 0f)
                 drehungFahrzeug1 = 1
             }
             }else{
@@ -684,11 +684,11 @@ public class Scene(private val window: GameWindow) {
         //}
        if(runde!=0) {
             if(h1!=0){
-                if(car.getPosition().distance(-88.0f, 0.8016f, -32.36f) <= 3f) {
+                if(car.getPosition().distance(-93.60f, 0.8016f, -36.37f) <= 3f) {
                     aktuellePosition = car.getPosition()
                     aktuellePosition.negate()
                     car.translateLocal(aktuellePosition)
-                    car.translateLocal(Vector3f(-88.0f, 0.8016f, -32.36f))
+                    car.translateLocal(Vector3f(-93.60f, 0.8016f, -36.37f))
                     println("Runde " + runde)
                     h1=0
                 }
@@ -729,16 +729,16 @@ public class Scene(private val window: GameWindow) {
             }
         }
         if(window.getKeyState(GLFW_KEY_R)){
-            car.setRotation()
+            car.setRotation(0f,0f,0f)
             aktuellePosition = car.getPosition()
             aktuellePosition.negate()
             car.translateLocal(aktuellePosition)
-            car.translateLocal(Vector3f(-88.0f, 0.8016f, -32.36f))
+            car.translateLocal(Vector3f(-93.60f, 0.8016f, -36.37f))
             drehungFahrzeug1 = 0
             speed = 0f
         }
         if(window.getKeyState(GLFW_KEY_L)){
-            car2.setRotation()
+            car2.setRotation(0f,0f,0f)
             aktuellePosition2 = car2.getPosition()
             aktuellePosition2.negate()
             car2.translateLocal(aktuellePosition2)

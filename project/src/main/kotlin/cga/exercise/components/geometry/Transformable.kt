@@ -18,8 +18,8 @@ open class Transformable(var modelMatrix: Matrix4f = Matrix4f(), var parent: Tra
         matrix.rotateXYZ(pitch,yaw,roll)
     }
 
-    fun setRotation(){
-        matrix.setRotationXYZ(0f,0f,0f)
+    fun setRotation(pitch: Float, yaw: Float, roll: Float){
+        matrix.setRotationXYZ(pitch,yaw,roll)
     }
     /**
      * Rotates object around given rotation center.
