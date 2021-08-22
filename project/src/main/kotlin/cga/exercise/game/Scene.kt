@@ -53,6 +53,8 @@ public class Scene(private val window: GameWindow) {
     private var aktuelleRotation2 = Vector3f(0f,0f,0f)
     private var h = 0
     private var h1 = 0
+    private var speed = -1f
+    private var speed2 = -1f
     //private var trackPos = Vector3f(0f,0f,0f)
 
     private var carMesh : Mesh
@@ -153,7 +155,9 @@ public class Scene(private val window: GameWindow) {
         //pointLight.parent = car
 
 
-        car.getPosition()
+        //car.getPosition()
+
+
     }
 
     fun render(dt: Float, t: Float) {
@@ -175,14 +179,19 @@ public class Scene(private val window: GameWindow) {
 
     fun update(dt: Float, t: Float) {
         if(window.getKeyState(GLFW_KEY_W)){
-            car.translateLocal(Vector3f(0.0f, 0.0f, -50*dt))
-
+            car.translateLocal(Vector3f(0.0f, 0.0f, speed*dt))
+            speed--
             //if(window.getKeyState(GLFW_KEY_A)) {
             //    car.rotateLocal(0.0f, Math.toRadians(100* dt), 0.0f)
             //}
             //if(window.getKeyState(GLFW_KEY_D)){
             //    car.rotateLocal(0.0f, Math.toRadians(-100 * dt),0.0f)
             //}
+        }else{
+            if(speed!=0f){
+                car.translateLocal(Vector3f(0.0f, 0.0f, speed*dt))
+                speed++
+            }
         }
         if(window.getKeyState(GLFW_KEY_S)){
             car.translateLocal(Vector3f(0.0f, 0.0f,50 * dt))
@@ -195,7 +204,13 @@ public class Scene(private val window: GameWindow) {
             //}
         }
         if(window.getKeyState(GLFW_KEY_UP)){
-            car2.translateLocal(Vector3f(0.0f, 0.0f, -50*dt))
+            car2.translateLocal(Vector3f(0.0f, 0.0f, speed2*dt))
+            speed2--
+        }else{
+            if(speed2!=0f){
+                car2.translateLocal(Vector3f(0.0f, 0.0f, speed2*dt))
+            speed2++
+        }
         }
         if(window.getKeyState(GLFW_KEY_DOWN)){
             car2.translateLocal(Vector3f(0.0f, 0.0f,50 * dt))
@@ -720,6 +735,7 @@ public class Scene(private val window: GameWindow) {
             car.translateLocal(aktuellePosition)
             car.translateLocal(Vector3f(-88.0f, 0.8016f, -32.36f))
             drehungFahrzeug1 = 0
+            speed = 0f
         }
         if(window.getKeyState(GLFW_KEY_L)){
             car2.setRotation()
@@ -728,6 +744,7 @@ public class Scene(private val window: GameWindow) {
             car2.translateLocal(aktuellePosition2)
             car2.translateLocal(Vector3f(-84.0f, 1.002f, -32.36f))
             drehungFahrzeug2 = 0
+            speed2 = 0f
         }
     }
 
