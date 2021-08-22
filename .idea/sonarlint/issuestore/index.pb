@@ -13,3 +13,9 @@ O
 project/assets/models/track.mtl,d\6\d6b4d70c96d0eb86143c2d78533d6b9b08682fd2
 O
 project/assets/models/track.obj,d\a\da65e912895fabedd401e1b2c4e8c3e5c6ce22d4
+9
+	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
+\
+,project/src/main/kotlin/cga/exercise/main.kt,0\8\08371c419fe7c479992f3351299af930061ca305
+s
+Cproject/src/main/kotlin/cga/exercise/components/light/PointLight.kt,c\d\cd65f326bda04e176c11eab4c3b2fd3ddaee12fb

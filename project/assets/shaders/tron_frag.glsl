@@ -7,7 +7,14 @@ in struct VertexData
     vec2 texture;
     vec3 normale;
     vec3 toPointLight;
-    vec3 toSpotLight;
+    vec3 toSpotLight1;
+    vec3 toSpotLight2;
+    vec3 toSpotLight3;
+    vec3 toSpotLight4;
+    vec3 toSpotLight5;
+    vec3 toSpotLight6;
+    vec3 toSpotLight7;
+    vec3 toSpotLight8;
     vec3 toEckLicht;
 } vertexData;
 
@@ -21,10 +28,45 @@ uniform float shininess;
 uniform vec3 cyclePointLightCol;
 uniform vec3 cyclePointLightAttParam;
 
-uniform vec3 cycleSpotLightCol;
-uniform vec3 cycleSpotLightAttParam;
-uniform vec2 cycleSpotLightAngle;
-uniform vec3 cycleSpotLightDir;
+uniform vec3 carOneSpotFRLightCol;
+uniform vec3 carOneSpotFRLightAttParam;
+uniform vec2 carOneSpotFRLightAngle;
+uniform vec3 carOneSpotFRLightDir;
+
+uniform vec3 carOneSpotFLLightCol;
+uniform vec3 carOneSpotFLLightAttParam;
+uniform vec2 carOneSpotFLLightAngle;
+uniform vec3 carOneSpotFLLightDir;
+
+uniform vec3 carOneSpotBRLightCol;
+uniform vec3 carOneSpotBRLightAttParam;
+uniform vec2 carOneSpotBRLightAngle;
+uniform vec3 carOneSpotBRLightDir;
+
+uniform vec3 carOneSpotBLLightCol;
+uniform vec3 carOneSpotBLLightAttParam;
+uniform vec2 carOneSpotBLLightAngle;
+uniform vec3 carOneSpotBLLightDir;
+
+uniform vec3 carTwoSpotFRLightCol;
+uniform vec3 carTwoSpotFRLightAttParam;
+uniform vec2 carTwoSpotFRLightAngle;
+uniform vec3 carTwoSpotFRLightDir;
+
+uniform vec3 carTwoSpotFLLightCol;
+uniform vec3 carTwoSpotFLLightAttParam;
+uniform vec2 carTwoSpotFLLightAngle;
+uniform vec3 carTwoSpotFLLightDir;
+
+uniform vec3 carTwoSpotBRLightCol;
+uniform vec3 carTwoSpotBRLightAttParam;
+uniform vec2 carTwoSpotBRLightAngle;
+uniform vec3 carTwoSpotBRLightDir;
+
+uniform vec3 carTwoSpotBLLightCol;
+uniform vec3 carTwoSpotBLLightAttParam;
+uniform vec2 carTwoSpotBLLightAngle;
+uniform vec3 carTwoSpotBLLightDir;
 
 uniform vec3 eckeLightCol;
 uniform vec3 eckeLightAttParam;
@@ -55,17 +97,86 @@ vec3 pointLightIntensity(vec3 lightColor, float length, vec3 attP){
     return lightColor * attenuate(length, attP);
 }
 
-vec3 spotLightIntensity(vec3 spotLightCol, float length, vec3 sp, vec3 spDir){
+vec3 spotLightIntensityCarOneFR(vec3 spotLightCol, float length, vec3 sp, vec3 spDir){
     float cosTheta = dot(sp, normalize(spDir));
-    float cosPhi = cos(cycleSpotLightAngle.x);
-    float cosGamma = cos(cycleSpotLightAngle.y);
+    float cosPhi = cos(carOneSpotFRLightAngle.x);
+    float cosGamma = cos(carOneSpotFRLightAngle.y);
 
     float intensity = (cosTheta-cosGamma)/(cosPhi-cosGamma);
     float cintensity = clamp(intensity, 0.0f, 1.0f);
 
-    return spotLightCol * cintensity * attenuate(length,cycleSpotLightAttParam);
+    return spotLightCol * cintensity * attenuate(length,carOneSpotFRLightAttParam);
 }
+vec3 spotLightIntensityCarOneFL(vec3 spotLightCol, float length, vec3 sp, vec3 spDir){
+    float cosTheta = dot(sp, normalize(spDir));
+    float cosPhi = cos(carOneSpotFLLightAngle.x);
+    float cosGamma = cos(carOneSpotFLLightAngle.y);
 
+    float intensity = (cosTheta-cosGamma)/(cosPhi-cosGamma);
+    float cintensity = clamp(intensity, 0.0f, 1.0f);
+
+    return spotLightCol * cintensity * attenuate(length,carOneSpotFLLightAttParam);
+}
+vec3 spotLightIntensityCarOneBR(vec3 spotLightCol, float length, vec3 sp, vec3 spDir){
+    float cosTheta = dot(sp, normalize(spDir));
+    float cosPhi = cos(carOneSpotBRLightAngle.x);
+    float cosGamma = cos(carOneSpotBRLightAngle.y);
+
+    float intensity = (cosTheta-cosGamma)/(cosPhi-cosGamma);
+    float cintensity = clamp(intensity, 0.0f, 1.0f);
+
+    return spotLightCol * cintensity * attenuate(length,carOneSpotBRLightAttParam);
+}
+vec3 spotLightIntensityCarOneBL(vec3 spotLightCol, float length, vec3 sp, vec3 spDir){
+    float cosTheta = dot(sp, normalize(spDir));
+    float cosPhi = cos(carOneSpotBLLightAngle.x);
+    float cosGamma = cos(carOneSpotBLLightAngle.y);
+
+    float intensity = (cosTheta-cosGamma)/(cosPhi-cosGamma);
+    float cintensity = clamp(intensity, 0.0f, 1.0f);
+
+    return spotLightCol * cintensity * attenuate(length,carOneSpotBLLightAttParam);
+}
+vec3 spotLightIntensityCarTwoFR(vec3 spotLightCol, float length, vec3 sp, vec3 spDir){
+    float cosTheta = dot(sp, normalize(spDir));
+    float cosPhi = cos(carTwoSpotFRLightAngle.x);
+    float cosGamma = cos(carTwoSpotFRLightAngle.y);
+
+    float intensity = (cosTheta-cosGamma)/(cosPhi-cosGamma);
+    float cintensity = clamp(intensity, 0.0f, 1.0f);
+
+    return spotLightCol * cintensity * attenuate(length,carTwoSpotFRLightAttParam);
+}
+vec3 spotLightIntensityCarTwoFL(vec3 spotLightCol, float length, vec3 sp, vec3 spDir){
+    float cosTheta = dot(sp, normalize(spDir));
+    float cosPhi = cos(carTwoSpotFLLightAngle.x);
+    float cosGamma = cos(carTwoSpotFLLightAngle.y);
+
+    float intensity = (cosTheta-cosGamma)/(cosPhi-cosGamma);
+    float cintensity = clamp(intensity, 0.0f, 1.0f);
+
+    return spotLightCol * cintensity * attenuate(length,carTwoSpotFLLightAttParam);
+}
+vec3 spotLightIntensityCarTwoBR(vec3 spotLightCol, float length, vec3 sp, vec3 spDir){
+    float cosTheta = dot(sp, normalize(spDir));
+    float cosPhi = cos(carTwoSpotBRLightAngle.x);
+    float cosGamma = cos(carTwoSpotBRLightAngle.y);
+
+    float intensity = (cosTheta-cosGamma)/(cosPhi-cosGamma);
+    float cintensity = clamp(intensity, 0.0f, 1.0f);
+
+    return spotLightCol * cintensity * attenuate(length,carTwoSpotBRLightAttParam);
+}
+vec3 spotLightIntensityCarTwoBL(vec3 spotLightCol, float length, vec3 sp, vec3 spDir){
+    float cosTheta = dot(sp, normalize(spDir));
+    float cosPhi = cos(carTwoSpotBLLightAngle.x);
+    float cosGamma = cos(carTwoSpotBLLightAngle.y);
+
+    float intensity = (cosTheta-cosGamma)/(cosPhi-cosGamma);
+    float cintensity = clamp(intensity, 0.0f, 1.0f);
+
+    return spotLightCol * cintensity * attenuate(length,carTwoSpotBLLightAttParam);
+}
 void main(){
 
     vec3 n = normalize(vertexData.normale);
@@ -77,8 +188,29 @@ void main(){
     float lpLength = length(vertexData.toPointLight);
     vec3 lpos = normalize(vertexData.toPointLight);
 
-    float spLength = length(vertexData.toSpotLight);
-    vec3 ppos = normalize(vertexData.toSpotLight);
+    float spLength1 = length(vertexData.toSpotLight1);
+    vec3 ppos1 = normalize(vertexData.toSpotLight1);
+
+    float spLength2 = length(vertexData.toSpotLight2);
+    vec3 ppos2 = normalize(vertexData.toSpotLight2);
+
+    float spLength3 = length(vertexData.toSpotLight3);
+    vec3 ppos3 = normalize(vertexData.toSpotLight3);
+
+    float spLength4 = length(vertexData.toSpotLight4);
+    vec3 ppos4 = normalize(vertexData.toSpotLight4);
+
+    float spLength5 = length(vertexData.toSpotLight5);
+    vec3 ppos5 = normalize(vertexData.toSpotLight5);
+
+    float spLength6 = length(vertexData.toSpotLight6);
+    vec3 ppos6 = normalize(vertexData.toSpotLight6);
+
+    float spLength7 = length(vertexData.toSpotLight7);
+    vec3 ppos7 = normalize(vertexData.toSpotLight7);
+
+    float spLength8 = length(vertexData.toSpotLight8);
+    vec3 ppos8 = normalize(vertexData.toSpotLight8);
 
     float eckeLength = length(vertexData.toEckLicht);
     vec3 eckpos = normalize(vertexData.toEckLicht);
@@ -91,8 +223,17 @@ void main(){
     vec3 pColor = emitColor * sceneColor;
 
     pColor += diffSpec(n, lpos, p, diffColor, specColor, shininess) * pointLightIntensity(cyclePointLightCol, lpLength, cyclePointLightAttParam);
-    pColor += diffSpec(n, ppos, p, diffColor, specColor, shininess) * spotLightIntensity(cycleSpotLightCol, spLength, ppos, cycleSpotLightDir);
     pColor += diffSpec(n, eckpos, p, diffColor, specColor, shininess) * pointLightIntensity(eckeLightCol, eckeLength, eckeLightAttParam);
+    pColor += diffSpec(n, ppos1, p, diffColor, specColor, shininess) * spotLightIntensityCarOneFR(carOneSpotFRLightCol, spLength1, ppos1, carOneSpotFRLightDir);
+    pColor += diffSpec(n, ppos2, p, diffColor, specColor, shininess) * spotLightIntensityCarOneFL(carOneSpotFLLightCol, spLength2, ppos2, carOneSpotFLLightDir);
+    pColor += diffSpec(n, ppos3, p, diffColor, specColor, shininess) * spotLightIntensityCarOneBR(carOneSpotBRLightCol, spLength3, ppos3, carOneSpotBRLightDir);
+    pColor += diffSpec(n, ppos4, p, diffColor, specColor, shininess) * spotLightIntensityCarOneBL(carOneSpotBLLightCol, spLength4, ppos4, carOneSpotBLLightDir);
+
+    pColor += diffSpec(n, ppos5, p, diffColor, specColor, shininess) * spotLightIntensityCarTwoFR(carTwoSpotFRLightCol, spLength5, ppos5, carTwoSpotFRLightDir);
+    pColor += diffSpec(n, ppos6, p, diffColor, specColor, shininess) * spotLightIntensityCarTwoFL(carTwoSpotFLLightCol, spLength6, ppos6, carTwoSpotFLLightDir);
+    pColor += diffSpec(n, ppos7, p, diffColor, specColor, shininess) * spotLightIntensityCarTwoBR(carTwoSpotBRLightCol, spLength7, ppos7, carTwoSpotBRLightDir);
+    pColor += diffSpec(n, ppos8, p, diffColor, specColor, shininess) * spotLightIntensityCarTwoBL(carTwoSpotBLLightCol, spLength8, ppos8, carTwoSpotBLLightDir);
+
     color = vec4(pColor , 1.0f);                                                                                        //Farbe wird neu gesetzt mit emit
 
 
