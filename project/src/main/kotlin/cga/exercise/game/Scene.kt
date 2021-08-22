@@ -216,7 +216,7 @@ public class Scene(private val window: GameWindow) {
             car2.translateLocal(Vector3f(0.0f, 0.0f,50 * dt))
         }
         //println("Auto2"+car2.getPosition())
-        //println("Auto1"+car.getPosition())
+        println("Auto1"+car.getPosition())
         //println(car2.getPosition().distance(car.getPosition()))
 
         if (drehungFahrzeug1 == 0) {
