@@ -25,8 +25,8 @@ public class Scene(private val window: GameWindow) {
     //private val staticShader: ShaderProgram = ShaderProgram("assets/shaders/simple_vert.glsl", "assets/shaders/simple_frag.glsl")
     private val staticShader1: ShaderProgram = ShaderProgram("project/assets/shaders/tron_vert.glsl", "project/assets/shaders/tron_frag.glsl")
     private var boden = Renderable() //aka Günther
-    private var car = ModelLoader.loadModel("project/assets/car/car.obj", Math.toRadians(0.0f),Math.toRadians(180.0f),0.0f)?: throw IllegalAccessException("Da is was nicht okay :(") //aka Dieter
-    private var car2 = ModelLoader.loadModel("project/assets/car/car.obj", Math.toRadians(0.0f),Math.toRadians(180.0f),0.0f)?: throw IllegalAccessException("Da is was nicht okay :(") //aka Dieter2
+    private var car = ModelLoader.loadModel("project/assets/car/car1.obj", Math.toRadians(0.0f),Math.toRadians(180.0f),0.0f)?: throw IllegalAccessException("Da is was nicht okay :(") //aka Dieter
+    private var car2 = ModelLoader.loadModel("project/assets/car/car2.obj", Math.toRadians(0.0f),Math.toRadians(180.0f),0.0f)?: throw IllegalAccessException("Da is was nicht okay :(") //aka Dieter2
     private var meshBoden : Mesh
     private var kamera = TronCamera()
     private var kameraOben = TronCamera()
