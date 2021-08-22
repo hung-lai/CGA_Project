@@ -128,15 +128,15 @@ public class Scene(private val window: GameWindow) {
 
         //pointLight = PointLight(kamera.getWorldPosition(), Vector3f(1f,1f,0f))
         //pointLight2 = PointLight(Vector3f(20.0f, 4.0f,20.0f),Vector3f(1.0f,1.0f,1.0f), Vector3f(1.0f,0.5f,0.1f))
-        spotLightCar1FR = SpotLight(Vector3f(-1.5f, 1.0f,-2.0f), Vector3f(1.0f))
-        spotLightCar1FL = SpotLight(Vector3f(-1.5f, 1.0f,-2.0f), Vector3f(1.0f))
-        spotLightCar1BR = SpotLight(Vector3f(1.0f, 1.0f,-2.0f), Vector3f(1.0f))
-        spotLightCar1BL = SpotLight(Vector3f(1.0f, 1.0f,-2.0f), Vector3f(1.0f))
+        spotLightCar1FR = SpotLight(Vector3f(1.2f, 1.0f,-2.0f), Vector3f(1.0f))
+        spotLightCar1FL = SpotLight(Vector3f(-1.2f, 1.0f,-2.0f), Vector3f(1.0f))
+        spotLightCar1BR = SpotLight(Vector3f(1.2f, 1.0f,1.0f), Vector3f(1.0f,0.0f,0.0f))
+        spotLightCar1BL = SpotLight(Vector3f(-1.2f, 1.0f,1.0f), Vector3f(1.0f,0.0f,0.0f))
 
-        spotLightCar2FR = SpotLight(Vector3f(1.0f, 1.0f,-2.0f), Vector3f(1.0f))
-        spotLightCar2FL = SpotLight(Vector3f(1.0f, 1.0f,-2.0f), Vector3f(1.0f))
-        spotLightCar2BR = SpotLight(Vector3f(1.0f, 1.0f,-2.0f), Vector3f(1.0f))
-        spotLightCar2BL = SpotLight(Vector3f(1.0f, 1.0f,-2.0f), Vector3f(1.0f))
+        spotLightCar2FR = SpotLight(Vector3f(1.2f, 1.0f,-2.0f), Vector3f(1.0f))
+        spotLightCar2FL = SpotLight(Vector3f(-1.2f, 1.0f,-2.0f), Vector3f(1.0f))
+        spotLightCar2BR = SpotLight(Vector3f(1.2f, 1.0f,1.0f), Vector3f(1.0f,0.0f,0.0f))
+        spotLightCar2BL = SpotLight(Vector3f(-1.2f, 1.0f,1.0f), Vector3f(1.0f,0.0f,0.0f))
 
         car1.scaleLocal(Vector3f(0.8f))
         car1.translateLocal(Vector3f(-110.0f,1.002f, -40.45f))
@@ -147,13 +147,13 @@ public class Scene(private val window: GameWindow) {
         //pointLight.translateLocal(Vector3f(0.0f, 4.0f, 0.0f))
         spotLightCar1FR.rotateLocal(Math.toRadians(-10.0f), Math.PI.toFloat(), 0.0f)
         spotLightCar1FL.rotateLocal(Math.toRadians(-10.0f), Math.PI.toFloat(), 0.0f)
-        spotLightCar1BR.rotateLocal(Math.toRadians(-10.0f), Math.PI.toFloat(), 0.0f)
-        spotLightCar1BL.rotateLocal(Math.toRadians(-10.0f), Math.PI.toFloat(), 0.0f)
+        spotLightCar1BR.rotateLocal(Math.toRadians(-170.0f), Math.PI.toFloat(), 0.0f)
+        spotLightCar1BL.rotateLocal(Math.toRadians(-170.0f), Math.PI.toFloat(), 0.0f)
 
         spotLightCar2FR.rotateLocal(Math.toRadians(-10.0f), Math.PI.toFloat(), 0.0f)
         spotLightCar2FL.rotateLocal(Math.toRadians(-10.0f), Math.PI.toFloat(), 0.0f)
-        spotLightCar2BR.rotateLocal(Math.toRadians(-10.0f), Math.PI.toFloat(), 0.0f)
-        spotLightCar2BL.rotateLocal(Math.toRadians(-10.0f), Math.PI.toFloat(), 0.0f)
+        spotLightCar2BR.rotateLocal(Math.toRadians(-170.0f), Math.PI.toFloat(), 0.0f)
+        spotLightCar2BL.rotateLocal(Math.toRadians(-170.0f), Math.PI.toFloat(), 0.0f)
 
         kamera = kameraOben
 
