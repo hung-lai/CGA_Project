@@ -40,6 +40,14 @@ public class Scene(private val window: GameWindow) {
     private var spotLightCar2BR : SpotLight
     private var spotLightCar2BL : SpotLight
 
+    private var spotStreet1 : SpotLight
+    private var spotStreet2 : SpotLight
+    private var spotStreet3 : SpotLight
+    private var spotStreet4 : SpotLight
+    private var spotStreet5 : SpotLight
+    private var spotStreet6 : SpotLight
+
+
     private var oldMousePosX : Double = -1.0
     private var oldMousePosY : Double = -1.0
     private var bool: Boolean = false
@@ -128,6 +136,22 @@ public class Scene(private val window: GameWindow) {
 
         //pointLight = PointLight(kamera.getWorldPosition(), Vector3f(1f,1f,0f))
         //pointLight2 = PointLight(Vector3f(20.0f, 4.0f,20.0f),Vector3f(1.0f,1.0f,1.0f), Vector3f(1.0f,0.5f,0.1f))
+        spotLightCar1FR = SpotLight(Vector3f(-1.2f, 0.0f,-2.0f), Vector3f(1.0f))
+        spotLightCar1FL = SpotLight(Vector3f(-1.2f, 0.0f,-2.0f), Vector3f(1.0f))
+        spotLightCar1BR = SpotLight(Vector3f(1.0f, 0.0f,-2.0f), Vector3f(1.0f))
+        spotLightCar1BL = SpotLight(Vector3f(1.0f, 0.0f,-2.0f), Vector3f(1.0f))
+
+        spotLightCar2FR = SpotLight(Vector3f(-1.2f, 0.0f,-2.0f), Vector3f(1.0f))
+        spotLightCar2FL = SpotLight(Vector3f(-1.2f, 0.0f,-2.0f), Vector3f(1.0f))
+        spotLightCar2BR = SpotLight(Vector3f(1.0f, 0.0f,-2.0f), Vector3f(1.0f))
+        spotLightCar2BL = SpotLight(Vector3f(1.0f, 0.0f,-2.0f), Vector3f(1.0f))
+
+        spotStreet1  = SpotLight(Vector3f(0.0f, 2.0f,0.0f), Vector3f(1.0f))
+        spotStreet2  = SpotLight(Vector3f(0.0f, 2.0f,0.0f), Vector3f(1.0f))
+        spotStreet3  = SpotLight(Vector3f(0.0f, 2.0f,0.0f), Vector3f(1.0f))
+        spotStreet4  = SpotLight(Vector3f(0.0f, 2.0f,0.0f), Vector3f(1.0f))
+        spotStreet5  = SpotLight(Vector3f(0.0f, 2.0f,0.0f), Vector3f(1.0f))
+        spotStreet6  = SpotLight(Vector3f(0.0f, 2.0f,0.0f), Vector3f(1.0f))
         spotLightCar1FR = SpotLight(Vector3f(1.2f, 1.0f,-2.0f), Vector3f(1.0f))
         spotLightCar1FL = SpotLight(Vector3f(-1.2f, 1.0f,-2.0f), Vector3f(1.0f))
         spotLightCar1BR = SpotLight(Vector3f(1.2f, 1.0f,1.0f), Vector3f(1.0f,0.0f,0.0f))
@@ -155,6 +179,13 @@ public class Scene(private val window: GameWindow) {
         spotLightCar2BR.rotateLocal(Math.toRadians(-170.0f), Math.PI.toFloat(), 0.0f)
         spotLightCar2BL.rotateLocal(Math.toRadians(-170.0f), Math.PI.toFloat(), 0.0f)
 
+        spotStreet1.rotateLocal(Math.toRadians(-10.0f), Math.PI.toFloat(), 0.0f)
+        spotStreet2.rotateLocal(Math.toRadians(-10.0f), Math.PI.toFloat(), 0.0f)
+        spotStreet3.rotateLocal(Math.toRadians(-10.0f), Math.PI.toFloat(), 0.0f)
+        spotStreet4.rotateLocal(Math.toRadians(-10.0f), Math.PI.toFloat(), 0.0f)
+        spotStreet5.rotateLocal(Math.toRadians(-10.0f), Math.PI.toFloat(), 0.0f)
+        spotStreet6.rotateLocal(Math.toRadians(-10.0f), Math.PI.toFloat(), 0.0f)
+
         kamera = kameraOben
 
         kameraOben.rotateLocal(Math.toRadians(-90.0f), 0.0f, 0.0f)
@@ -178,7 +209,7 @@ public class Scene(private val window: GameWindow) {
         spotLightCar1BL.parent = car1
 
 
-        //car1.getPosition()
+        //car.getPosition()
 
 
     }
@@ -205,6 +236,12 @@ public class Scene(private val window: GameWindow) {
         spotLightCar2FL.bind(staticShader1, "carTwoSpotFL", kamera.getCalculateViewMatrix())
         spotLightCar2BR.bind(staticShader1, "carTwoSpotBR", kamera.getCalculateViewMatrix())
         spotLightCar2BL.bind(staticShader1, "carTwoSpotBL", kamera.getCalculateViewMatrix())
+        spotStreet1.bind(staticShader1, "streetSpot", kamera.getCalculateViewMatrix())
+        spotStreet2.bind(staticShader1, "street2Spot", kamera.getCalculateViewMatrix())
+        spotStreet3.bind(staticShader1, "street3Spot", kamera.getCalculateViewMatrix())
+        spotStreet4.bind(staticShader1, "street4Spot", kamera.getCalculateViewMatrix())
+        spotStreet5.bind(staticShader1, "street5Spot", kamera.getCalculateViewMatrix())
+        spotStreet6.bind(staticShader1, "street6Spot", kamera.getCalculateViewMatrix())
 
         //pointLight.lightColor = Vector3f(abs(sin(t/1)),abs(sin(t/3)),abs(sin(t/2)))
     }
