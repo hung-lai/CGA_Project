@@ -23,3 +23,11 @@ P
  project/assets/models/track1.obj,f\b\fb55987eb68cfa36ee4a1296763ec6bb7ff07da5
 q
 Aproject/src/main/kotlin/cga/exercise/components/camera/ICamera.kt,8\a\8ac764bc9938514202cbf451d51cbfe7299b6de5
+9
+	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
+\
+,project/src/main/kotlin/cga/exercise/main.kt,0\8\08371c419fe7c479992f3351299af930061ca305
+b
+2project/src/main/kotlin/cga/framework/OBJLoader.kt,3\4\349da0ca38356d533d21f7b7c3a7164eb447d6f5
+y
+Iproject/src/main/kotlin/cga/exercise/components/geometry/Transformable.kt,6\1\61ee2f309a91886f836b5fb73837705f79c297c2

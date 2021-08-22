@@ -296,9 +296,9 @@ public class Scene(private val window: GameWindow) {
             }
             }else{
             if (drehungFahrzeug1 == 1) {
-                if (car1.getPosition().distance(-68.08f, 0.8016f, -67.86f) <= 1f) {
+                if (car1.getPosition().distance(-85,62f, 0.8016f, -60,33f) <= 1f) {
                     println(drehungFahrzeug1)
-                    car1.rotateLocal(0f, Math.toRadians(300f), 0f)
+                    car1.rotateLocal(0f, Math.toRadians(-30f), 0f)
                     drehungFahrzeug1 = 2
                 }
             }else{
