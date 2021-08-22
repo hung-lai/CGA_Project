@@ -140,9 +140,6 @@ public class Scene(private val window: GameWindow) {
         spotLightCar2BR = SpotLight(Vector3f(1.0f, 1.0f,-2.0f), Vector3f(1.0f))
         spotLightCar2BL = SpotLight(Vector3f(1.0f, 1.0f,-2.0f), Vector3f(1.0f))
 
-        car1.scaleLocal(Vector3f(0.8f))
-        car1.translateLocal(Vector3f(-110.0f,1.002f, -40.45f))
-
         car2.scaleLocal(Vector3f(0.8f))
         car2.translateLocal(Vector3f(-105.0f,-1.248f, -45.45f))
 
