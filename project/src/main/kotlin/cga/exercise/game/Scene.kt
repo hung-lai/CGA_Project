@@ -28,7 +28,6 @@ public class Scene(private val window: GameWindow) {
     private var car = ModelLoader.loadModel("project/assets/car/car.obj", Math.toRadians(0.0f),Math.toRadians(180.0f),0.0f)?: throw IllegalAccessException("Da is was nicht okay :(") //aka Dieter
     private var car2 = ModelLoader.loadModel("project/assets/car/car.obj", Math.toRadians(0.0f),Math.toRadians(180.0f),0.0f)?: throw IllegalAccessException("Da is was nicht okay :(") //aka Dieter2
     private var meshBoden : Mesh
-    //private var meshKugel : Mesh
     private var kamera = TronCamera()
     private var kameraOben = TronCamera()
     private var kameraTP = TronCamera()
@@ -37,6 +36,9 @@ public class Scene(private val window: GameWindow) {
     private var pointLight : PointLight
     private var pointLight2 : PointLight
     private var spotLight : SpotLight
+    //private var spotLightR : SpotLight
+    //private var spotLightL : SpotLightL
+    //private var spotLightR : SpotLightR
 
     private var oldMousePosX : Double = -1.0
     private var oldMousePosY : Double = -1.0
@@ -54,9 +56,9 @@ public class Scene(private val window: GameWindow) {
     private var h = 0
     private var h1 = 0
     //private var trackPos = Vector3f(0f,0f,0f)
+
     //private var carMesh : Mesh
     //private var car = Renderable()
-
     //private var car2Mesh : Mesh
     //private var car2 = Renderable()
 
@@ -72,7 +74,7 @@ public class Scene(private val window: GameWindow) {
         glDepthFunc(GL_LESS); GLError.checkThrow()
 
         //load an object and create a mesh
-        val res = loadOBJ("project/assets/models/track.obj")
+        val res = loadOBJ("project/assets/models/track1.obj")
         //Get the first mesh of the first object
         val objMesh: OBJLoader.OBJMesh = res.objects[0].meshes[0]
         //Create the mesh
@@ -83,7 +85,7 @@ public class Scene(private val window: GameWindow) {
         val vertexAttributes = arrayOf<VertexAttribute>(attrPos, attrTC, attrNorm)
         //meshBoden = Mesh(objMesh.vertexData, objMesh.indexData, vertexAttributes, bodenMaterial)
 
-        val texture_emit = Texture2D("project/assets/textures/grau.png",true)
+        val texture_emit = Texture2D("project/assets/textures/track.png",true)
         val texture_diff = Texture2D("project/assets/textures/ground_diff.png",true)
         val texture_spec = Texture2D("project/assets/textures/ground_spec.png",true)
 
@@ -94,12 +96,10 @@ public class Scene(private val window: GameWindow) {
 
 
         //val carMaterial = Material(texture_diff, texture_emit, texture_spec, 60.0f, Vector2f(1.0f, 1.0f))
-
         //val resCar = OBJLoader.loadOBJ("project/assets/car/car.obj")
         //val carObj = resCar.objects[0].meshes[0]
         //carMesh = Mesh(carObj.vertexData, carObj.indexData, vertexAttributes, carMaterial)
         //car.list.add(carMesh)
-
         //val car2Material = Material(texture_diff, texture_emit, texture_spec, 60.0f, Vector2f(1.0f, 1.0f))
         //val resCar2 = OBJLoader.loadOBJ("project/assets/car/car.obj")
         //val car2Obj = resCar.objects[0].meshes[0]
@@ -113,7 +113,8 @@ public class Scene(private val window: GameWindow) {
 
         pointLight = PointLight(kamera.getWorldPosition(), Vector3f(1f,1f,0f))
         pointLight2 = PointLight(Vector3f(20.0f, 4.0f,20.0f),Vector3f(1.0f,1.0f,1.0f), Vector3f(1.0f,0.5f,0.1f))
-        spotLight = SpotLight(Vector3f(0.0f, 1.0f,-2.0f), Vector3f(1.0f))
+        spotLight = SpotLight(Vector3f(-1.0f, 1.0f,-2.0f), Vector3f(1.0f))
+        //spotLightR = SpotLight(Vector3f(1.0f, 1.0f,-2.0f), Vector3f(1.0f))
 
         car.scaleLocal(Vector3f(0.8f))
         car.translateLocal(Vector3f(-110.0f,1.002f, -40.45f))
@@ -123,6 +124,7 @@ public class Scene(private val window: GameWindow) {
 
         pointLight.translateLocal(Vector3f(0.0f, 4.0f, 0.0f))
         spotLight.rotateLocal(Math.toRadians(-10.0f), Math.PI.toFloat(), 0.0f)
+        //spotLightR.rotateLocal(Math.toRadians(-10.0f), Math.PI.toFloat(), 0.0f)
 
         kamera = kameraOben
 
@@ -138,6 +140,7 @@ public class Scene(private val window: GameWindow) {
         kameraTP.parent = car
         kameraFP.parent = car
         spotLight.parent = car
+        //spotLightR.parent = car
         pointLight.parent = car
 
 
@@ -157,6 +160,7 @@ public class Scene(private val window: GameWindow) {
         pointLight.bind(staticShader1, "cyclePoint")
         pointLight2.bind(staticShader1, "ecke")
         spotLight.bind(staticShader1, "cycleSpot", kamera.getCalculateViewMatrix())
+        //spotLightR.bind(staticShader1, "cycleSpotR", kamera.getCalculateViewMatrix())
         pointLight.lightColor = Vector3f(abs(sin(t/1)),abs(sin(t/3)),abs(sin(t/2)))
     }
 
