@@ -9,7 +9,7 @@ uniform mat4 model_matrix;
 uniform mat4 view_matrix;
 uniform mat4 projection_matrix;
 
-uniform vec3 cyclePointLightPos;
+//uniform vec3 cyclePointLightPos;
 uniform vec3 carOneSpotFRLightPos;
 uniform vec3 carOneSpotFLLightPos;
 uniform vec3 carOneSpotBRLightPos;
@@ -28,7 +28,7 @@ out struct VertexData
     vec3 position;
     vec2 texture;
     vec3 normale;
-    vec3 toPointLight;
+    //vec3 toPointLight;
     vec3 toSpotLight1;
         vec3 toSpotLight2;
         vec3 toSpotLight3;
@@ -48,8 +48,8 @@ void main(){
     //vec4 norm = model_matrix * vec4(normale, 1.0f);
     vec4 norm = inverse(transpose(modelView)) * vec4(normale, 1.0f);
 
-    vec4 lp = view_matrix * vec4(cyclePointLightPos, 1.0f);     //position im Viewspace
-    vertexData.toPointLight = (lp - pos).xyz;                   //Richtungsvektor
+    //vec4 lp = view_matrix * vec4(cyclePointLightPos, 1.0f);     //position im Viewspace
+    //vertexData.toPointLight = (lp - pos).xyz;                   //Richtungsvektor
 
     vec4 lp2 = view_matrix * vec4(carOneSpotFRLightPos, 1.0f);
     vertexData.toSpotLight1 = (lp2 - pos).xyz;

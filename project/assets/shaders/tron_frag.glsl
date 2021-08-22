@@ -6,7 +6,7 @@ in struct VertexData
     vec3 position;
     vec2 texture;
     vec3 normale;
-    vec3 toPointLight;
+    //vec3 toPointLight;
     vec3 toSpotLight1;
     vec3 toSpotLight2;
     vec3 toSpotLight3;
@@ -25,8 +25,8 @@ uniform sampler2D diff;
 uniform sampler2D spec;
 uniform float shininess;
 
-uniform vec3 cyclePointLightCol;
-uniform vec3 cyclePointLightAttParam;
+//uniform vec3 cyclePointLightCol;
+//uniform vec3 cyclePointLightAttParam;
 
 uniform vec3 carOneSpotFRLightCol;
 uniform vec3 carOneSpotFRLightAttParam;
@@ -93,9 +93,9 @@ float attenuate(float length, vec3 attParam){
     return 1.0/(attParam.x + attParam.y * length + attParam.z * pow(length,2));
 }
 
-vec3 pointLightIntensity(vec3 lightColor, float length, vec3 attP){
-    return lightColor * attenuate(length, attP);
-}
+//vec3 pointLightIntensity(vec3 lightColor, float length, vec3 attP){
+//    return lightColor * attenuate(length, attP);
+//}
 
 vec3 spotLightIntensityCarOneFR(vec3 spotLightCol, float length, vec3 sp, vec3 spDir){
     float cosTheta = dot(sp, normalize(spDir));
@@ -185,8 +185,8 @@ void main(){
     vec3 emitColor = texture(emit, vertexData.texture).rgb;
     vec3 specColor = texture(spec, vertexData.texture).rgb;
 
-    float lpLength = length(vertexData.toPointLight);
-    vec3 lpos = normalize(vertexData.toPointLight);
+    //float lpLength = length(vertexData.toPointLight);
+    //vec3 lpos = normalize(vertexData.toPointLight);
 
     float spLength1 = length(vertexData.toSpotLight1);
     vec3 ppos1 = normalize(vertexData.toSpotLight1);
@@ -222,8 +222,8 @@ void main(){
 
     vec3 pColor = emitColor * sceneColor;
 
-    pColor += diffSpec(n, lpos, p, diffColor, specColor, shininess) * pointLightIntensity(cyclePointLightCol, lpLength, cyclePointLightAttParam);
-    pColor += diffSpec(n, eckpos, p, diffColor, specColor, shininess) * pointLightIntensity(eckeLightCol, eckeLength, eckeLightAttParam);
+    //pColor += diffSpec(n, lpos, p, diffColor, specColor, shininess) * pointLightIntensity(cyclePointLightCol, lpLength, cyclePointLightAttParam);
+    //pColor += diffSpec(n, eckpos, p, diffColor, specColor, shininess) * pointLightIntensity(eckeLightCol, eckeLength, eckeLightAttParam);
     pColor += diffSpec(n, ppos1, p, diffColor, specColor, shininess) * spotLightIntensityCarOneFR(carOneSpotFRLightCol, spLength1, ppos1, carOneSpotFRLightDir);
     pColor += diffSpec(n, ppos2, p, diffColor, specColor, shininess) * spotLightIntensityCarOneFL(carOneSpotFLLightCol, spLength2, ppos2, carOneSpotFLLightDir);
     pColor += diffSpec(n, ppos3, p, diffColor, specColor, shininess) * spotLightIntensityCarOneBR(carOneSpotBRLightCol, spLength3, ppos3, carOneSpotBRLightDir);
