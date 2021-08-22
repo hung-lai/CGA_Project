@@ -1,10 +1,6 @@
 
 i
 9project/assets/Light Cycle/Light Cycle/HQ_Movie cycle.obj,b\1\b1ecbae5d00b9294bbc50313da5a4a94570967d8
-J
-project/assets/car/car.mtl,d\e\dec20fa33f5caa5ff9dd3164d56945f5f92a58a4
-J
-project/assets/car/car.obj,8\a\8af2304909f2256431d7dbc5664660f50713fd45
 V
 &project/assets/models/streetlights.mtl,f\f\ffe8d00de9247b34e98505a8f14c5d2021ca7378
 V
@@ -25,3 +21,5 @@ P
  project/assets/models/track1.mtl,e\d\ed9214df07fe5d01a2ad7eadeaccc6c00d98dfbc
 P
  project/assets/models/track1.obj,f\b\fb55987eb68cfa36ee4a1296763ec6bb7ff07da5
+q
+Aproject/src/main/kotlin/cga/exercise/components/camera/ICamera.kt,8\a\8ac764bc9938514202cbf451d51cbfe7299b6de5

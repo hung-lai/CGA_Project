@@ -248,7 +248,7 @@ public class Scene(private val window: GameWindow) {
             car2.translateLocal(Vector3f(0.0f, 0.0f,50 * dt))
         }
         //println("Auto2"+car2.getPosition())
-        println("Auto1"+car1.getPosition())
+        //println("Auto1"+car1.getPosition())
         //println(car2.getPosition().distance(car1.getPosition()))
 
         if (drehungFahrzeug1 == 0) {
@@ -777,6 +777,9 @@ public class Scene(private val window: GameWindow) {
             car2.translateLocal(Vector3f(-84.0f, 1.002f, -32.36f))
             drehungFahrzeug2 = 0
             speed2 = 0f
+        }
+        if(window.getKeyState(GLFW_KEY_K)){
+            println("Auto1"+car1.getPosition())
         }
     }
 
