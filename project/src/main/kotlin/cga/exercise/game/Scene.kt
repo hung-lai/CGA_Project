@@ -65,7 +65,7 @@ public class Scene(private val window: GameWindow) {
     init {
 
         //initial opengl state
-        glClearColor(1.0f, 1.0f, 1.0f, 1.0f); GLError.checkThrow() //schwarz
+        glClearColor(0.1f, 0.1f, 0.1f, 1.0f); GLError.checkThrow() //schwarz
         glDisable(GL_CULL_FACE); GLError.checkThrow()
         glEnable(GL_CULL_FACE)
         glFrontFace(GL_CCW); GLError.checkThrow()
