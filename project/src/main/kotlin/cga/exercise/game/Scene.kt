@@ -53,6 +53,8 @@ public class Scene(private val window: GameWindow) {
     private var runde2 = 0
     private var aktuellePosition = Vector3f(0f,0f,0f)
     private var aktuellePosition2 = Vector3f(0f,0f,0f)
+    private var aktuelleRotation = Vector3f(0f,0f,0f)
+    private var aktuelleRotation2 = Vector3f(0f,0f,0f)
     private var h = 0
     private var h1 = 0
     //private var trackPos = Vector3f(0f,0f,0f)
@@ -703,6 +705,22 @@ public class Scene(private val window: GameWindow) {
                 car2.translateGlobal(Vector3f(0.0f, 2f, 0.0f))
                 i = 1
             }
+        }
+        if(window.getKeyState(GLFW_KEY_R)){
+            car.setRotation()
+            aktuellePosition = car.getPosition()
+            aktuellePosition.negate()
+            car.translateLocal(aktuellePosition)
+            car.translateLocal(Vector3f(-88.0f, 0.8016f, -32.36f))
+            drehungFahrzeug1 = 0
+        }
+        if(window.getKeyState(GLFW_KEY_L)){
+            car2.setRotation()
+            aktuellePosition2 = car2.getPosition()
+            aktuellePosition2.negate()
+            car2.translateLocal(aktuellePosition2)
+            car2.translateLocal(Vector3f(-84.0f, 1.002f, -32.36f))
+            drehungFahrzeug2 = 0
         }
     }
 
