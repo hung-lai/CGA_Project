@@ -1,11 +1,13 @@
 package cga.exercise.components.geometry
 
+import org.joml.Math
 import org.joml.Matrix4f
 import org.joml.Vector3f
 
 
 open class Transformable(var modelMatrix: Matrix4f = Matrix4f(), var parent: Transformable? = null) {
     var matrix = Matrix4f()
+
     /**
      * Rotates object around its own origin.
      * @param pitch radiant angle around x-axis ccw
@@ -16,6 +18,9 @@ open class Transformable(var modelMatrix: Matrix4f = Matrix4f(), var parent: Tra
         matrix.rotateXYZ(pitch,yaw,roll)
     }
 
+    fun setRotation(){
+        matrix.setRotationXYZ(0f,0f,0f)
+    }
     /**
      * Rotates object around given rotation center.
      * @param pitch radiant angle around x-axis ccw
@@ -68,10 +73,6 @@ open class Transformable(var modelMatrix: Matrix4f = Matrix4f(), var parent: Tra
         return Vector3f(matrix.m30(),matrix.m31(),matrix.m32())
     }
 
-    //fun nullPosition(){
-    //    matrix.translate(1f,1f,1f)
-    //
-    //}
     /**
      * Returns position based on aggregated translations incl. parents.
      * Hint: last column of world model matrix
