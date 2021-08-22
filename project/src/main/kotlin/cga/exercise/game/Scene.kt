@@ -16,6 +16,8 @@ import org.joml.*
 import org.joml.Vector3f
 import org.lwjgl.glfw.GLFW.*
 import org.lwjgl.opengl.GL30.*
+import java.lang.Math.*
+import kotlin.math.sin
 
 public class Scene(private val window: GameWindow) {
     private val staticShader1: ShaderProgram = ShaderProgram("project/assets/shaders/tron_vert.glsl", "project/assets/shaders/tron_frag.glsl")
@@ -742,11 +744,11 @@ public class Scene(private val window: GameWindow) {
         //}
        if(runde!=0) {
             if(h1!=0){
-                if(car1.getPosition().distance(-88.0f, 0.8016f, -32.36f) <= 3f) {
+                if(car1.getPosition().distance(-93.60f, 0.8016f, -36.37f) <= 3f) {
                     aktuellePosition = car1.getPosition()
                     aktuellePosition.negate()
                     car1.translateLocal(aktuellePosition)
-                    car1.translateLocal(Vector3f(-88.0f, 0.8016f, -32.36f))
+                    car1.translateLocal(Vector3f(-93.60f, 0.8016f, -36.37f))
                     println("Runde " + runde)
                     h1=0
                 }
