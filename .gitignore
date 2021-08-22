@@ -28,3 +28,8 @@ Desktop.ini
 *.zip
 *.tar.gz
 *.rar
+
+##Build
+build/
+
+.gradle/
