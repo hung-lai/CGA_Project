@@ -20,6 +20,14 @@ uniform vec3 carTwoSpotFLLightPos;
 uniform vec3 carTwoSpotBRLightPos;
 uniform vec3 carTwoSpotBLLightPos;
 
+uniform vec3 streetSpotLightPos;
+uniform vec3 street2SpotLightPos;
+uniform vec3 street3SpotLightPos;
+uniform vec3 street4SpotLightPos;
+uniform vec3 street5SpotLightPos;
+uniform vec3 street6SpotLightPos;
+
+
 uniform vec2 tcMultiplier;          //anlegen von Uniform -> in den Shader laden
 
 uniform vec3 eckeLightPos;
@@ -30,14 +38,22 @@ out struct VertexData
     vec3 normale;
     //vec3 toPointLight;
     vec3 toSpotLight1;
-        vec3 toSpotLight2;
-        vec3 toSpotLight3;
-        vec3 toSpotLight4;
-        vec3 toSpotLight5;
-        vec3 toSpotLight6;
-        vec3 toSpotLight7;
-        vec3 toSpotLight8;
+    vec3 toSpotLight2;
+    vec3 toSpotLight3;
+    vec3 toSpotLight4;
+    vec3 toSpotLight5;
+    vec3 toSpotLight6;
+    vec3 toSpotLight7;
+    vec3 toSpotLight8;
     vec3 toEckLicht;
+    vec3 toSpotLight9;
+    vec3 toSpotLight10;
+    vec3 toSpotLight11;
+    vec3 toSpotLight12;
+    vec3 toSpotLight13;
+    vec3 toSpotLight14;
+
+
 } vertexData;
 
 
@@ -68,9 +84,22 @@ void main(){
     vec4 lp9 = view_matrix * vec4(carTwoSpotBLLightPos, 1.0f);
     vertexData.toSpotLight8 = (lp9 - pos).xyz;
 
-
     vec4 lp10 = view_matrix * vec4(eckeLightPos, 1.0f);
     vertexData.toEckLicht = (lp10 - pos).xyz;
+
+    vec4 lp11 = view_matrix * vec4(streetSpotLightPos, 1.0f);
+    vertexData.toSpotLight9 = (lp11 - pos).xyz;
+    vec4 lp12 = view_matrix * vec4(street2SpotLightPos, 1.0f);
+    vertexData.toSpotLight10 = (lp12 - pos).xyz;
+    vec4 lp13 = view_matrix * vec4(street3SpotLightPos, 1.0f);
+    vertexData.toSpotLight11 = (lp13 - pos).xyz;
+    vec4 lp14 = view_matrix * vec4(street4SpotLightPos, 1.0f);
+    vertexData.toSpotLight12 = (lp14 - pos).xyz;
+    vec4 lp15 = view_matrix * vec4(street5SpotLightPos, 1.0f);
+    vertexData.toSpotLight13 = (lp15 - pos).xyz;
+    vec4 lp16 = view_matrix * vec4(street6SpotLightPos, 1.0f);
+    vertexData.toSpotLight14 = (lp16 - pos).xyz;
+
     //gl_Position = vec4(pos.xy, -pos.z, 1.0f);
     gl_Position = projection_matrix * view_matrix * model_matrix * vec4(position, 1.0f);
     vertexData.position = -pos.xyz;
