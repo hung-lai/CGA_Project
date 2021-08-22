@@ -11,7 +11,6 @@ import cga.exercise.components.shader.ShaderProgram
 import cga.exercise.components.texture.Texture2D
 import cga.framework.GLError
 import cga.framework.GameWindow
-import cga.framework.ModelLoader
 import cga.framework.OBJLoader
 import cga.framework.OBJLoader.loadOBJ
 import org.joml.*
@@ -133,18 +132,18 @@ public class Scene(private val window: GameWindow) {
 
         pointLight = PointLight(kamera.getWorldPosition(), Vector3f(1f,1f,0f))
         pointLight2 = PointLight(Vector3f(20.0f, 4.0f,20.0f),Vector3f(1.0f,1.0f,1.0f), Vector3f(1.0f,0.5f,0.1f))
-        spotLightCar1FR = SpotLight(Vector3f(1.0f, 1.0f,-2.0f), Vector3f(1.0f))
-        spotLightCar1FL = SpotLight(Vector3f(5.0f, 1.0f,-2.0f), Vector3f(1.0f))
+        spotLightCar1FR = SpotLight(Vector3f(-1.5f, 1.0f,-2.0f), Vector3f(1.0f))
+        spotLightCar1FL = SpotLight(Vector3f(-1.5f, 1.0f,-2.0f), Vector3f(1.0f))
         spotLightCar1BR = SpotLight(Vector3f(1.0f, 1.0f,-2.0f), Vector3f(1.0f))
-        spotLightCar1BL = SpotLight(Vector3f(0.0f, 1.0f,-2.0f), Vector3f(1.0f))
+        spotLightCar1BL = SpotLight(Vector3f(1.0f, 1.0f,-2.0f), Vector3f(1.0f))
 
-        spotLightCar2FR = SpotLight(Vector3f(-1.0f, 1.0f,-3.5f), Vector3f(1.0f))
-        spotLightCar2FL = SpotLight(Vector3f(-1.0f, 1.0f,-3.5f), Vector3f(1.0f))
-        spotLightCar2BR = SpotLight(Vector3f(-1.0f, 3.0f,2.0f), Vector3f(0.5f))
-        spotLightCar2BL = SpotLight(Vector3f(2.0f, 1.0f,2.0f), Vector3f(0.5f))
+        spotLightCar2FR = SpotLight(Vector3f(1.0f, 1.0f,-2.0f), Vector3f(1.0f))
+        spotLightCar2FL = SpotLight(Vector3f(1.0f, 1.0f,-2.0f), Vector3f(1.0f))
+        spotLightCar2BR = SpotLight(Vector3f(1.0f, 1.0f,-2.0f), Vector3f(1.0f))
+        spotLightCar2BL = SpotLight(Vector3f(1.0f, 1.0f,-2.0f), Vector3f(1.0f))
 
-        car1.scaleLocal(Vector3f(0.8f))
-        car1.translateLocal(Vector3f(-110.0f,1.002f, -40.45f))
+        car.scaleLocal(Vector3f(0.8f))
+        car.translateLocal(Vector3f(-110.0f,1.002f, -40.45f))
 
         car2.scaleLocal(Vector3f(0.8f))
         car2.translateLocal(Vector3f(-105.0f,-1.248f, -40.45f))
@@ -171,16 +170,16 @@ public class Scene(private val window: GameWindow) {
         kameraFP.rotateLocal(Math.toRadians(-10f),0f,0f)
         kameraFP.translateLocal(Vector3f(0f,2f,-1f))
 
-        kameraTP.parent = car1
-        kameraFP.parent = car1
+        kameraTP.parent = car
+        kameraFP.parent = car
         spotLightCar2FR.parent = car2
         spotLightCar2FL.parent = car2
         spotLightCar2BR.parent = car2
         spotLightCar2BL.parent = car2
-        spotLightCar1FR.parent = car1
-        spotLightCar1FL.parent = car1
-        spotLightCar1BR.parent = car1
-        spotLightCar1BL.parent = car1
+        spotLightCar1FR.parent = car
+        spotLightCar1FL.parent = car
+        spotLightCar1BR.parent = car
+        spotLightCar1BL.parent = car
 
 
         //car.getPosition()
@@ -204,7 +203,7 @@ public class Scene(private val window: GameWindow) {
         spotLightCar1FL.bind(staticShader1, "carOneSpotFL", kamera.getCalculateViewMatrix())
         spotLightCar1BR.bind(staticShader1, "carOneSpotBR", kamera.getCalculateViewMatrix())
         spotLightCar1BL.bind(staticShader1, "carOneSpotBL", kamera.getCalculateViewMatrix())
-        car1.render(staticShader1)
+        car.render(staticShader1)
         car2.render(staticShader1)
         spotLightCar2FR.bind(staticShader1, "carTwoSpotFR", kamera.getCalculateViewMatrix())
         spotLightCar2FL.bind(staticShader1, "carTwoSpotFL", kamera.getCalculateViewMatrix())
