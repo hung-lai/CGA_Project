@@ -13,3 +13,11 @@ O
 project/assets/models/track.mtl,d\6\d6b4d70c96d0eb86143c2d78533d6b9b08682fd2
 O
 project/assets/models/track.obj,d\a\da65e912895fabedd401e1b2c4e8c3e5c6ce22d4
+\
+,project/src/main/kotlin/cga/exercise/main.kt,0\8\08371c419fe7c479992f3351299af930061ca305
+v
+Fproject/src/main/kotlin/cga/exercise/components/geometry/Renderable.kt,2\3\23006120710a1975343a1bb808b6ad405c9869d0
+P
+ project/assets/models/ground.obj,8\0\80f8a94140085c5ac284a06899d9a40f069c01e3
+P
+ project/assets/models/sphere.obj,7\6\7681ea573dc2d84ae1123d3469c14250dee71392
