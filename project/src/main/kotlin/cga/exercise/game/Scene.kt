@@ -187,11 +187,11 @@ public class Scene(private val window: GameWindow) {
         spotLightCar2BL = SpotLight(Vector3f(1.0f, 0.0f,-2.0f), Vector3f(1.0f))
 
         spotStreet1  = SpotLight(Vector3f(-8.0f, 3.0f,0.0f), Vector3f(1.0f))
-        spotStreet2  = SpotLight(Vector3f(0.0f, 2.0f,0.0f), Vector3f(1.0f))
-        spotStreet3  = SpotLight(Vector3f(0.0f, 2.0f,0.0f), Vector3f(1.0f))
-        spotStreet4  = SpotLight(Vector3f(0.0f, 2.0f,0.0f), Vector3f(1.0f))
-        spotStreet5  = SpotLight(Vector3f(0.0f, 2.0f,0.0f), Vector3f(1.0f))
-        spotStreet6  = SpotLight(Vector3f(0.0f, 2.0f,0.0f), Vector3f(1.0f))
+        spotStreet2  = SpotLight(Vector3f(37.0f, 3.0f,0.0f), Vector3f(1.0f))
+        spotStreet3  = SpotLight(Vector3f(-60.0f, 3.0f,0.0f), Vector3f(1.0f))
+        spotStreet4  = SpotLight(Vector3f(-47.0f, 3.0f,47.0f), Vector3f(1.0f))
+        spotStreet5  = SpotLight(Vector3f(86.5f, 3.0f,30.0f), Vector3f(1.0f))
+        spotStreet6  = SpotLight(Vector3f(-72.0f, 3.0f,-53.0f), Vector3f(1.0f))
 
         spotLightCar1FR = SpotLight(Vector3f(1.2f, 1.0f,-2.0f), Vector3f(1.0f))
         spotLightCar1FL = SpotLight(Vector3f(-1.2f, 1.0f,-2.0f), Vector3f(1.0f))
@@ -221,11 +221,11 @@ public class Scene(private val window: GameWindow) {
         spotLightCar2BL.rotateLocal(Math.toRadians(-170.0f), Math.PI.toFloat(), 0.0f)
 
         spotStreet1.rotateLocal(0.0f,Math.toRadians(-45.0f) , 0.0f)
-        spotStreet2.rotateLocal(Math.toRadians(-10.0f), Math.PI.toFloat(), 0.0f)
-        spotStreet3.rotateLocal(Math.toRadians(-10.0f), Math.PI.toFloat(), 0.0f)
-        spotStreet4.rotateLocal(Math.toRadians(-10.0f), Math.PI.toFloat(), 0.0f)
-        spotStreet5.rotateLocal(Math.toRadians(-10.0f), Math.PI.toFloat(), 0.0f)
-        spotStreet6.rotateLocal(Math.toRadians(-10.0f), Math.PI.toFloat(), 0.0f)
+        spotStreet2.rotateLocal(0.0f,Math.toRadians(50.0f) , 0.0f)
+        spotStreet3.rotateLocal(0.0f,Math.toRadians(82.0f) , 0.0f)
+        spotStreet4.rotateLocal(0.0f,Math.toRadians(0.0f) , 0.0f)
+        spotStreet5.rotateLocal(0.0f,Math.toRadians(-125.0f) , 0.0f)
+        spotStreet6.rotateLocal(0.0f,Math.toRadians(180.0f) , 0.0f)
 
         kamera = kameraOben
 
