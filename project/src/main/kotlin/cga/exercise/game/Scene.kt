@@ -16,8 +16,6 @@ import org.joml.*
 import org.joml.Vector3f
 import org.lwjgl.glfw.GLFW.*
 import org.lwjgl.opengl.GL30.*
-import java.lang.Math.*
-import kotlin.math.sin
 
 public class Scene(private val window: GameWindow) {
     private val staticShader1: ShaderProgram = ShaderProgram("project/assets/shaders/tron_vert.glsl", "project/assets/shaders/tron_frag.glsl")
@@ -46,6 +44,7 @@ public class Scene(private val window: GameWindow) {
     private var spotStreet4 : SpotLight
     private var spotStreet5 : SpotLight
     private var spotStreet6 : SpotLight
+
 
 
     private var oldMousePosX : Double = -1.0
@@ -81,6 +80,16 @@ public class Scene(private val window: GameWindow) {
     private var car2Mesh : Mesh
     private var car2 = Renderable()
 
+    private var streetLightMesh : Mesh
+    private var streetLight1 = Renderable()
+    private var streetLight2 = Renderable()
+    private var streetLight3 = Renderable()
+    private var streetLight4 = Renderable()
+    private var streetLight5 = Renderable()
+    private var streetLight6 = Renderable()
+
+
+
     init {
 
         //initial opengl state
@@ -114,16 +123,28 @@ public class Scene(private val window: GameWindow) {
         val texture_diff_car2 = Texture2D("project/assets/textures/ground_diff.png",true)
         val texture_spec_car2 = Texture2D("project/assets/textures/ground_spec.png",true)
 
+        val texture_emit_streetLight = Texture2D("project/assets/streetlight/streetlight.png",true)
+        val texture_diff_StreetLight = Texture2D("project/assets/textures/ground_diff.png",true)
+        val texture_spec_StreetLight = Texture2D("project/assets/textures/ground_spec.png",true)
+
+
+
         //texture_emit.setTexParams(GL_NEAREST,GL_NEAREST, GL_NEAREST_MIPMAP_NEAREST, GL_NEAREST)                       //moire-Effekt
         texture_emit_track.setTexParams(GL_REPEAT,GL_REPEAT, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR)                              //GL_Repeat werte hinterm Komma werden genutzt. Linear =
         texture_diff_track.setTexParams(GL_REPEAT, GL_REPEAT, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR)
         texture_spec_track.setTexParams(GL_REPEAT, GL_REPEAT, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR)
+
         texture_emit_car1.setTexParams(GL_REPEAT,GL_REPEAT, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR)                              //GL_Repeat werte hinterm Komma werden genutzt. Linear =
         texture_diff_car1.setTexParams(GL_REPEAT, GL_REPEAT, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR)
         texture_spec_car1.setTexParams(GL_REPEAT, GL_REPEAT, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR)
+
         texture_emit_car2.setTexParams(GL_REPEAT,GL_REPEAT, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR)                              //GL_Repeat werte hinterm Komma werden genutzt. Linear =
         texture_diff_car2.setTexParams(GL_REPEAT, GL_REPEAT, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR)
         texture_spec_car2.setTexParams(GL_REPEAT, GL_REPEAT, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR)
+
+        texture_emit_streetLight.setTexParams(GL_REPEAT,GL_REPEAT, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR)                              //GL_Repeat werte hinterm Komma werden genutzt. Linear =
+        texture_diff_StreetLight.setTexParams(GL_REPEAT, GL_REPEAT, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR)
+        texture_spec_StreetLight.setTexParams(GL_REPEAT, GL_REPEAT, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR)
 
         val carMaterial = Material(texture_diff_car1, texture_emit_car1, texture_spec_car1, 60.0f, Vector2f(1.0f, 1.0f))
         val resCar = OBJLoader.loadOBJ("project/assets/car/car1.obj")
@@ -132,9 +153,21 @@ public class Scene(private val window: GameWindow) {
         car1.list.add(carMesh)
         val car2Material = Material(texture_diff_car2, texture_emit_car2, texture_spec_car2, 60.0f, Vector2f(1.0f, 1.0f))
         val resCar2 = OBJLoader.loadOBJ("project/assets/car/car2.obj")
-        val car2Obj = resCar.objects[0].meshes[0]
+        val car2Obj = resCar2.objects[0].meshes[0]
         car2Mesh = Mesh(carObj.vertexData, car2Obj.indexData, vertexAttributes, car2Material)
         car2.list.add(car2Mesh)
+
+        val streetLight1Material = Material(texture_diff_StreetLight, texture_emit_streetLight, texture_spec_StreetLight, 60.0f, Vector2f(1.0f, 1.0f))
+        val resStreet1 = OBJLoader.loadOBJ("project/assets/streetlight/streetlights.obj")
+        val streetLightObj = resStreet1.objects[0].meshes[0]
+        streetLightMesh = Mesh(streetLightObj.vertexData, streetLightObj.indexData, vertexAttributes, streetLight1Material)
+        streetLight1.list.add(streetLightMesh)
+        streetLight2.list.add(streetLightMesh)
+        streetLight3.list.add(streetLightMesh)
+        streetLight4.list.add(streetLightMesh)
+        streetLight5.list.add(streetLightMesh)
+        streetLight6.list.add(streetLightMesh)
+
 
         val bodenMaterial = Material(texture_diff_track, texture_emit_track, texture_spec_track, 60.0f, Vector2f(1.0f, 1.0f))   //neuen Boden erstellen mit unseren Werten
 
@@ -153,12 +186,13 @@ public class Scene(private val window: GameWindow) {
         spotLightCar2BR = SpotLight(Vector3f(1.0f, 0.0f,-2.0f), Vector3f(1.0f))
         spotLightCar2BL = SpotLight(Vector3f(1.0f, 0.0f,-2.0f), Vector3f(1.0f))
 
-        spotStreet1  = SpotLight(Vector3f(0.0f, 2.0f,0.0f), Vector3f(1.0f))
+        spotStreet1  = SpotLight(Vector3f(-8.0f, 3.0f,0.0f), Vector3f(1.0f))
         spotStreet2  = SpotLight(Vector3f(0.0f, 2.0f,0.0f), Vector3f(1.0f))
         spotStreet3  = SpotLight(Vector3f(0.0f, 2.0f,0.0f), Vector3f(1.0f))
         spotStreet4  = SpotLight(Vector3f(0.0f, 2.0f,0.0f), Vector3f(1.0f))
         spotStreet5  = SpotLight(Vector3f(0.0f, 2.0f,0.0f), Vector3f(1.0f))
         spotStreet6  = SpotLight(Vector3f(0.0f, 2.0f,0.0f), Vector3f(1.0f))
+
         spotLightCar1FR = SpotLight(Vector3f(1.2f, 1.0f,-2.0f), Vector3f(1.0f))
         spotLightCar1FL = SpotLight(Vector3f(-1.2f, 1.0f,-2.0f), Vector3f(1.0f))
         spotLightCar1BR = SpotLight(Vector3f(1.2f, 1.0f,1.0f), Vector3f(1.0f,0.0f,0.0f))
@@ -186,7 +220,7 @@ public class Scene(private val window: GameWindow) {
         spotLightCar2BR.rotateLocal(Math.toRadians(-170.0f), Math.PI.toFloat(), 0.0f)
         spotLightCar2BL.rotateLocal(Math.toRadians(-170.0f), Math.PI.toFloat(), 0.0f)
 
-        spotStreet1.rotateLocal(Math.toRadians(-10.0f), Math.PI.toFloat(), 0.0f)
+        spotStreet1.rotateLocal(0.0f,Math.toRadians(-45.0f) , 0.0f)
         spotStreet2.rotateLocal(Math.toRadians(-10.0f), Math.PI.toFloat(), 0.0f)
         spotStreet3.rotateLocal(Math.toRadians(-10.0f), Math.PI.toFloat(), 0.0f)
         spotStreet4.rotateLocal(Math.toRadians(-10.0f), Math.PI.toFloat(), 0.0f)
@@ -204,8 +238,26 @@ public class Scene(private val window: GameWindow) {
         kameraFP.rotateLocal(Math.toRadians(-10f),0f,0f)
         kameraFP.translateLocal(Vector3f(0f,2f,-1f))
 
-        kameraTP.parent = car1
-        kameraFP.parent = car1
+        streetLight1.translateLocal(Vector3f(-8.0f, 0.0f, 0.0f))
+        streetLight1.rotateLocal(0.0f, Math.toRadians(-53f), 0.0f)
+
+        streetLight2.translateLocal(Vector3f(33.0f, 0.0f, 0.0f))
+        streetLight2.rotateLocal(0.0f, Math.toRadians(53f), 0.0f)
+
+        streetLight3.translateLocal(Vector3f(-59.0f, 0.0f, 0.0f))
+        streetLight3.rotateLocal(0.0f, Math.toRadians(90f), 0.0f)
+
+        streetLight4.translateLocal(Vector3f(-45.0f, 0.0f, 46.0f))
+
+        streetLight5.translateLocal(Vector3f(87.0f, 0.0f, 30.0f))
+        streetLight5.rotateLocal(0.0f, Math.toRadians(-110f), 0.0f)
+
+        streetLight6.translateLocal(Vector3f(-72.0f, 0.0f, -52.0f))
+        streetLight6.rotateLocal(0.0f, Math.toRadians(-180f), 0.0f)
+
+
+        kameraTP.parent = car2
+        kameraFP.parent = car2
         spotLightCar2FR.parent = car2
         spotLightCar2FL.parent = car2
         spotLightCar2BR.parent = car2
@@ -232,6 +284,12 @@ public class Scene(private val window: GameWindow) {
 
         //pointLight.bind(staticShader1, "cyclePoint")
         //pointLight2.bind(staticShader1, "ecke")
+        streetLight1.render(staticShader1)
+        streetLight2.render(staticShader1)
+        streetLight3.render(staticShader1)
+        streetLight4.render(staticShader1)
+        streetLight5.render(staticShader1)
+        streetLight6.render(staticShader1)
 
         spotLightCar1FR.bind(staticShader1, "carOneSpotFR", kamera.getCalculateViewMatrix())
         spotLightCar1FL.bind(staticShader1, "carOneSpotFL", kamera.getCalculateViewMatrix())
