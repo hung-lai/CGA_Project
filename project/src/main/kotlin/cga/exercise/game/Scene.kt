@@ -249,8 +249,8 @@ public class Scene(private val window: GameWindow) {
         streetLight6.rotateLocal(0.0f, Math.toRadians(-180f), 0.0f)
 
 
-        kameraTP.parent = car2
-        kameraFP.parent = car2
+        kameraTP.parent = car1
+        kameraFP.parent = car1
         spotLightCar2FR.parent = car2
         spotLightCar2FL.parent = car2
         spotLightCar2BR.parent = car2
