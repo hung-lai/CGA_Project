@@ -27,5 +27,5 @@ Liste (nice to have)
 -	Komplexes Fahrzeugmodell (evtl. Formel 1 Auto) ✓
 -	1st-Person View & Top Down View ✓
 - Minimap  
-- 2tes Fahrzeug für 2ten Spieler (Kollision möglich)
+- 2tes Fahrzeug für 2ten Spieler✓ (Kollision möglich)
 
