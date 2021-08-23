@@ -17,9 +17,5 @@ P
  project/assets/models/sphere.obj,7\6\7681ea573dc2d84ae1123d3469c14250dee71392
 w
 Gproject/src/main/kotlin/cga/exercise/components/shader/ShaderProgram.kt,b\6\b607afd8e508264892caa69b5b39a6d914285fc3
-P
- project/assets/models/track1.mtl,e\d\ed9214df07fe5d01a2ad7eadeaccc6c00d98dfbc
-P
- project/assets/models/track1.obj,f\b\fb55987eb68cfa36ee4a1296763ec6bb7ff07da5
 q
 Aproject/src/main/kotlin/cga/exercise/components/camera/ICamera.kt,8\a\8ac764bc9938514202cbf451d51cbfe7299b6de5

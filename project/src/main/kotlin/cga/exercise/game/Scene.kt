@@ -249,8 +249,8 @@ public class Scene(private val window: GameWindow) {
         streetLight6.rotateLocal(0.0f, Math.toRadians(-180f), 0.0f)
 
 
-        kameraTP.parent = car2
-        kameraFP.parent = car2
+        kameraTP.parent = car1
+        kameraFP.parent = car1
         spotLightCar2FR.parent = car2
         spotLightCar2FL.parent = car2
         spotLightCar2BR.parent = car2
@@ -612,14 +612,14 @@ public class Scene(private val window: GameWindow) {
                                                                                                                                                                     car1.rotateLocal(0f, Math.toRadians(-20f), 0f)
                                                                                                                                                                     drehungFahrzeug1 = 38
                                                                                                                                                                 }
-                                                                                                                                                } else {
-                                                                                                                                                    if (drehungFahrzeug1 == 38) {
-                                                                                                                                                        if (car1.getPosition().distance(-88.81f, 0.8016f, -26.31f) <= 1f) {
-                                                                                                                                                            println(drehungFahrzeug1)
-                                                                                                                                                            car1.rotateLocal(0f, Math.toRadians(-60f), 0f)
-                                                                                                                                                            drehungFahrzeug1 = 0
-                                                                                                                                                            runde++
-                                                                                                                                                        }
+                                                                                                                                                            } else {
+                                                                                                                                                                if (drehungFahrzeug1 == 38) {
+                                                                                                                                                                    if (car1.getPosition().distance(-88.81f, 0.8016f, -26.31f) <= 1f) {
+                                                                                                                                                                        println(drehungFahrzeug1)
+                                                                                                                                                                        car1.rotateLocal(0f, Math.toRadians(-60f), 0f)
+                                                                                                                                                                        drehungFahrzeug1 = 0
+                                                                                                                                                                        runde++
+                                                                                                                                                                    }
 
 
                                                                                                                                                     }
@@ -836,75 +836,30 @@ public class Scene(private val window: GameWindow) {
                                                                                                                 }
                                                                                                             }else {
                                                                                                                 if (drehungFahrzeug2 == 25) {
-                                                                                                                    if (car2.getPosition()
-                                                                                                                            .distance(
-                                                                                                                                -59.56f,
-                                                                                                                                1.002f,
-                                                                                                                                -27.35f
-                                                                                                                            ) <= 1f
-                                                                                                                    ) {
-                                                                                                                        println(
-                                                                                                                            drehungFahrzeug2
-                                                                                                                        )
-                                                                                                                        car2.rotateLocal(
-                                                                                                                            0f,
-                                                                                                                            Math.toRadians(
-                                                                                                                                30f
-                                                                                                                            ),
-                                                                                                                            0f
-                                                                                                                        )
-                                                                                                                        drehungFahrzeug2 =
-                                                                                                                            26
+                                                                                                                    if (car2.getPosition().distance(-59.56f, 1.002f, -27.35f) <= 1f) {
+                                                                                                                        println(drehungFahrzeug2)
+                                                                                                                        car2.rotateLocal(0f, Math.toRadians(30f), 0f)
+                                                                                                                        drehungFahrzeug2 = 26
                                                                                                                     }
                                                                                                                 } else {
                                                                                                                     if (drehungFahrzeug2 == 26) {
-                                                                                                                        if (car2.getPosition()
-                                                                                                                                .distance(
-                                                                                                                                    -76.32f,
-                                                                                                                                    1.002f,
-                                                                                                                                    -27.01f
-                                                                                                                                ) <= 1f
-                                                                                                                        ) {
-                                                                                                                            println(
-                                                                                                                                drehungFahrzeug2
-                                                                                                                            )
-                                                                                                                            car2.rotateLocal(
-                                                                                                                                0f,
-                                                                                                                                Math.toRadians(
-                                                                                                                                    -30f
-                                                                                                                                ),
-                                                                                                                                0f
-                                                                                                                            )
-                                                                                                                            drehungFahrzeug2 =
-                                                                                                                                27
+                                                                                                                        if (car2.getPosition().distance(-76.32f, 1.002f, -27.01f) <= 1f) {
+                                                                                                                            println(drehungFahrzeug2)
+                                                                                                                            car2.rotateLocal(0f, Math.toRadians(-30f), 0f)
+                                                                                                                            drehungFahrzeug2 = 27
                                                                                                                         }
                                                                                                                     } else {
                                                                                                                         if (drehungFahrzeug2 == 27) {
-                                                                                                                            if (car2.getPosition()
-                                                                                                                                    .distance(
-                                                                                                                                        -83.44f,
-                                                                                                                                        1.002f,
-                                                                                                                                        -31.51f
-                                                                                                                                    ) <= 1f
-                                                                                                                            ) {
-                                                                                                                                println(
-                                                                                                                                    drehungFahrzeug2
-                                                                                                                                )
-                                                                                                                                car2.rotateLocal(
-                                                                                                                                    0f,
-                                                                                                                                    Math.toRadians(
-                                                                                                                                        -60f
-                                                                                                                                    ),
-                                                                                                                                    0f
-                                                                                                                                )
-                                                                                                                                drehungFahrzeug2 =
-                                                                                                                                    0
+                                                                                                                            if (car2.getPosition().distance(-83.44f, 1.002f, -31.51f) <= 1f) {
+                                                                                                                                println(drehungFahrzeug2)
+                                                                                                                                car2.rotateLocal(0f, Math.toRadians(-60f), 0f)
+                                                                                                                                drehungFahrzeug2 = 0
                                                                                                                                 runde2++
+                                                                                                                                            }
+                                                                                                                                     }
+                                                                                                                                }
                                                                                                                             }
                                                                                                                         }
-                                                                                                                    }
-                                                                                                                }
-                                                                                                            }
                                                                                                                     }
                                                                                                                 }
                                                                                                             }
