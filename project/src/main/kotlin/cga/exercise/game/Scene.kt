@@ -26,8 +26,7 @@ public class Scene(private val window: GameWindow) {
     private var kameraTP = TronCamera()
     private var kameraFP = TronCamera()
     //scene setup
-    //private var pointLight : PointLight
-    //private var pointLight2 : PointLight
+
     private var spotLightCar1FR : SpotLight
     private var spotLightCar1FL : SpotLight
     private var spotLightCar1BR : SpotLight
@@ -51,7 +50,7 @@ public class Scene(private val window: GameWindow) {
     private var oldMousePosY : Double = -1.0
     private var bool: Boolean = false
 
-    //private var cp1 = Checkpoint()
+
 
     private var i = 0
     private var drehungFahrzeug2 = 0
@@ -73,7 +72,7 @@ public class Scene(private val window: GameWindow) {
     private var rundenZeit2 = 0
     private var time1Start = 0
     private var time2Start = 0
-    //private var trackPos = Vector3f(0f,0f,0f)
+
 
     private var carMesh : Mesh
     private var car1 = Renderable()
@@ -111,7 +110,7 @@ public class Scene(private val window: GameWindow) {
         val attrTC = VertexAttribute(1,2, GL_FLOAT, stride, 3 * 4) //textureCoordinate
         val attrNorm = VertexAttribute(2,3, GL_FLOAT, stride, 5 * 4) //normalval
         val vertexAttributes = arrayOf<VertexAttribute>(attrPos, attrTC, attrNorm)
-        //meshBoden = Mesh(objMesh.vertexData, objMesh.indexData, vertexAttributes, bodenMaterial)
+
 
         val texture_emit_track = Texture2D("project/assets/textures/track.png",true)
         val texture_diff_track = Texture2D("project/assets/textures/ground_diff.png",true)
@@ -130,19 +129,19 @@ public class Scene(private val window: GameWindow) {
 
 
         //texture_emit.setTexParams(GL_NEAREST,GL_NEAREST, GL_NEAREST_MIPMAP_NEAREST, GL_NEAREST)                       //moire-Effekt
-        texture_emit_track.setTexParams(GL_REPEAT,GL_REPEAT, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR)                              //GL_Repeat werte hinterm Komma werden genutzt. Linear =
+        texture_emit_track.setTexParams(GL_REPEAT,GL_REPEAT, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR)
         texture_diff_track.setTexParams(GL_REPEAT, GL_REPEAT, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR)
         texture_spec_track.setTexParams(GL_REPEAT, GL_REPEAT, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR)
 
-        texture_emit_car1.setTexParams(GL_REPEAT,GL_REPEAT, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR)                              //GL_Repeat werte hinterm Komma werden genutzt. Linear =
+        texture_emit_car1.setTexParams(GL_REPEAT,GL_REPEAT, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR)
         texture_diff_car1.setTexParams(GL_REPEAT, GL_REPEAT, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR)
         texture_spec_car1.setTexParams(GL_REPEAT, GL_REPEAT, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR)
 
-        texture_emit_car2.setTexParams(GL_REPEAT,GL_REPEAT, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR)                              //GL_Repeat werte hinterm Komma werden genutzt. Linear =
+        texture_emit_car2.setTexParams(GL_REPEAT,GL_REPEAT, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR)
         texture_diff_car2.setTexParams(GL_REPEAT, GL_REPEAT, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR)
         texture_spec_car2.setTexParams(GL_REPEAT, GL_REPEAT, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR)
 
-        texture_emit_streetLight.setTexParams(GL_REPEAT,GL_REPEAT, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR)                              //GL_Repeat werte hinterm Komma werden genutzt. Linear =
+        texture_emit_streetLight.setTexParams(GL_REPEAT,GL_REPEAT, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR)
         texture_diff_StreetLight.setTexParams(GL_REPEAT, GL_REPEAT, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR)
         texture_spec_StreetLight.setTexParams(GL_REPEAT, GL_REPEAT, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR)
 
@@ -174,8 +173,7 @@ public class Scene(private val window: GameWindow) {
         meshBoden = Mesh(objMesh.vertexData, objMesh.indexData, vertexAttributes, bodenMaterial)                        //bodenMaterial wird benötigt
         boden.list.add(meshBoden)
 
-        //pointLight = PointLight(kamera.getWorldPosition(), Vector3f(1f,1f,0f))
-        //pointLight2 = PointLight(Vector3f(20.0f, 4.0f,20.0f),Vector3f(1.0f,1.0f,1.0f), Vector3f(1.0f,0.5f,0.1f))
+
         spotLightCar1FR = SpotLight(Vector3f(-1.2f, 0.0f,-2.0f), Vector3f(1.0f))
         spotLightCar1FL = SpotLight(Vector3f(-1.2f, 0.0f,-2.0f), Vector3f(1.0f))
         spotLightCar1BR = SpotLight(Vector3f(1.0f, 0.0f,-2.0f), Vector3f(1.0f))
@@ -270,8 +268,9 @@ public class Scene(private val window: GameWindow) {
 
         //car.getPosition()
         println("Willkommen auf der Carrera Bahn")
-        println("Drücke w zum starten")
+        println("Drücke W zum starten")
         println("Drücke V um die Perspektive zu wechseln")
+        println("Drücke R um das Fahrzeug zu resetten")
         println("Drücke P für den zweiten Spieler")
 
     }
@@ -283,10 +282,7 @@ public class Scene(private val window: GameWindow) {
         kamera.bind(staticShader1)
         boden.render(staticShader1)
 
-        //staticShader1.setUniform("sceneColor",Vector3f(abs(sin(t/1)),abs(sin(t/3)),abs(sin(t/2))))          //statemaschine
 
-        //pointLight.bind(staticShader1, "cyclePoint")
-        //pointLight2.bind(staticShader1, "ecke")
         streetLight1.render(staticShader1)
         streetLight2.render(staticShader1)
         streetLight3.render(staticShader1)
@@ -311,7 +307,7 @@ public class Scene(private val window: GameWindow) {
         spotStreet5.bind(staticShader1, "street5Spot", kamera.getCalculateViewMatrix())
         spotStreet6.bind(staticShader1, "street6Spot", kamera.getCalculateViewMatrix())
 
-        //pointLight.lightColor = Vector3f(abs(sin(t/1)),abs(sin(t/3)),abs(sin(t/2)))
+
     }
 
     fun update(dt: Float, t: Float) {
@@ -1088,6 +1084,7 @@ public class Scene(private val window: GameWindow) {
                 car2.translateGlobal(Vector3f(0.0f, 2f, 0.0f))
                 i = 1
                 println("Drücke Pfeiltaste nach oben um zu starten")
+                println("Drücke L um das 2. Fahrzeug zu resetten")
                 println("Die Kamera wurde für den zweispieler Modus festgesetzt")
             }
         }
